@@ -1,0 +1,3180 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FINTRACE X | Financial Crime Infrastructure & Money-Trail Analysis System (PS05)</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind Custom Design Tokens -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+          },
+          colors: {
+            obsidian: '#070B14',
+            slatepanel: '#0F172A',
+            cardsurface: '#131C31',
+            cybercyan: '#38BDF8',
+            cyberemerald: '#10B981',
+            cyberamber: '#F59E0B',
+            cybercrimson: '#F43F5E',
+            cyberindigo: '#818CF8',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* ==========================================================================
+       FINTRACE X — TACTICAL CYBER-FORENSICS DESIGN SYSTEM & ANIMATIONS
+       ========================================================================== */
+    :root {
+      --bg-obsidian: #070B14;
+      --bg-panel: #0F172A;
+      --bg-card: #131C31;
+      --border-cyber: rgba(56, 189, 248, 0.18);
+      --border-bright: rgba(56, 189, 248, 0.45);
+    }
+
+    body {
+      background-color: var(--bg-obsidian);
+      color: #E2E8F0;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-variant-numeric: tabular-nums;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 12% 0%, rgba(56, 189, 248, 0.07) 0%, transparent 42%),
+        radial-gradient(circle at 88% 12%, rgba(244, 63, 94, 0.05) 0%, transparent 38%);
+    }
+
+    /* Tactical Forensics Grid Canvas */
+    .tactical-grid {
+      background-color: #080D18;
+      background-image:
+        linear-gradient(to right, rgba(56, 189, 248, 0.055) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.055) 1px, transparent 1px),
+        radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.05), transparent 72%);
+      background-size: 28px 28px, 28px 28px, 100% 100%;
+    }
+
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #070B14;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1E293B;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+
+    /* Animated Dash Flow for Active Money Trail & Proxy Streams */
+    @keyframes flowDash {
+      to {
+        stroke-dashoffset: -24;
+      }
+    }
+    .edge-flow-active {
+      stroke-dasharray: 6 6;
+      animation: flowDash 1.1s linear infinite;
+    }
+
+    @keyframes pulseRing {
+      0% {
+        transform: scale(0.95);
+        opacity: 0.78;
+      }
+      70% {
+        transform: scale(1.25);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1.25);
+        opacity: 0;
+      }
+    }
+    .node-pulse-ring {
+      transform-origin: center;
+      transform-box: fill-box;
+      animation: pulseRing 2.1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+    }
+
+    /* Cyber Surfaces */
+    .cyber-panel {
+      background-color: #0F172A;
+      border: 1px solid rgba(56, 189, 248, 0.18);
+      box-shadow: 0 12px 32px -10px rgba(2, 6, 23, 0.82);
+    }
+
+    .cyber-card {
+      background-color: #131C31;
+      border: 1px solid rgba(56, 189, 248, 0.16);
+      transition: all 0.18s ease;
+    }
+
+    .cyber-card:hover {
+      border-color: rgba(56, 189, 248, 0.38);
+      background-color: #17233D;
+    }
+
+    /* Inline Click-to-Edit Team Chips */
+    .editable-chip {
+      border-bottom: 1px dashed rgba(56, 189, 248, 0.5);
+      transition: all 0.15s ease;
+    }
+    .editable-chip:hover,
+    .editable-chip:focus {
+      background-color: rgba(56, 189, 248, 0.14);
+      border-bottom-color: #38BDF8;
+      outline: none;
+    }
+
+    /* Print Styles for ReportLab PDF Dossier */
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #printable-dossier,
+      #printable-dossier * {
+        visibility: visible !important;
+      }
+      #printable-dossier {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        background: #ffffff !important;
+        color: #0f172a !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 16px !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-sky-500/30 selection:text-sky-200">
+
+  <!-- ========================================================================
+       TOP COMMAND BAR
+       ======================================================================== -->
+  <header class="sticky top-0 z-40 bg-[#070B14]/95 backdrop-blur-md border-b border-sky-400/20 px-4 lg:px-6 py-3">
+    <div class="max-w-[1620px] mx-auto flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3">
+      
+      <!-- Brand Emblem & Hackathon Identity -->
+      <div class="flex flex-wrap items-center gap-3">
+        <div class="flex items-center gap-3">
+          <!-- Custom SVG Shield-and-Network Emblem -->
+          <div class="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-sky-500/20 via-indigo-500/15 to-emerald-500/15 border border-sky-400/45 shadow-lg shadow-sky-500/15">
+            <svg class="w-6 h-6 text-sky-400" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M16 3L5 7.8V15.4C5 22.3 9.7 28.6 16 30C22.3 28.6 27 22.3 27 15.4V7.8L16 3Z" stroke="currentColor" stroke-width="1.8" fill="rgba(56,189,248,0.10)"/>
+              <circle cx="16" cy="11" r="2.3" fill="#38BDF8"/>
+              <circle cx="10.8" cy="19.5" r="2.1" fill="#10B981"/>
+              <circle cx="21.2" cy="19.5" r="2.1" fill="#F43F5E"/>
+              <path d="M16 13.3L11.8 17.8M16 13.3L20.2 17.8M12.9 19.5H19.1" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-[#070B14]"></span>
+          </div>
+
+          <div>
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="text-lg sm:text-xl font-extrabold tracking-wider text-white">FINTRACE <span class="text-sky-400">X</span></span>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold tracking-wider uppercase bg-sky-500/15 text-sky-300 border border-sky-400/35">
+                RAJASTHAN POLICE CYBER SECURITY HACKATHON 2026 • PS05
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-400">Evidence-Driven Financial Crime Infrastructure &amp; Money-Trail Analysis System</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Click-to-Edit Team Metadata & Synthetic Demo Mode Badge -->
+      <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-xs">
+        <div class="flex flex-wrap items-center gap-2 bg-[#0F172A] border border-sky-400/20 rounded-xl px-3 py-1.5">
+          <div class="flex items-center gap-1.5">
+            <span class="text-slate-400 font-medium">Team:</span>
+            <span id="meta-team" contenteditable="true" spellcheck="false" title="Click to edit Team Name"
+              class="editable-chip font-mono font-semibold text-sky-300 px-1.5 py-0.5 rounded cursor-text">[Team Name]</span>
+          </div>
+          <span class="text-slate-600 hidden sm:inline">|</span>
+          <div class="flex items-center gap-1.5">
+            <span class="text-slate-400 font-medium">College:</span>
+            <span id="meta-college" contenteditable="true" spellcheck="false" title="Click to edit College Name"
+              class="editable-chip font-mono font-semibold text-slate-200 px-1.5 py-0.5 rounded cursor-text">[College Name]</span>
+          </div>
+          <span class="text-slate-600 hidden md:inline">|</span>
+          <div class="flex items-center gap-1.5">
+            <span class="text-slate-400 font-medium">Members:</span>
+            <span id="meta-members" contenteditable="true" spellcheck="false" title="Click to edit Team Members"
+              class="editable-chip font-mono text-slate-300 px-1.5 py-0.5 rounded cursor-text">[Names]</span>
+          </div>
+        </div>
+
+        <!-- Synthetic Demo Mode Badge -->
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-400/35 text-amber-300 font-mono text-[11px] font-bold">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
+          </span>
+          SYNTHETIC DEMO MODE
+        </div>
+      </div>
+    </div>
+
+    <!-- Primary 4-Tab Navigation Bar -->
+    <div class="max-w-[1620px] mx-auto mt-3 pt-2.5 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-2">
+      <nav class="flex flex-wrap items-center gap-1.5" aria-label="Primary Workspace Navigation">
+        <button onclick="switchMainView('workspace')" id="nav-btn-workspace"
+          class="main-nav-btn flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-sky-500/20 text-sky-300 border border-sky-400/45 shadow-sm shadow-sky-500/10 cursor-pointer">
+          <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+          <span>1. Investigation Workspace</span>
+        </button>
+
+        <button onclick="switchMainView('simulator')" id="nav-btn-simulator"
+          class="main-nav-btn flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white hover:bg-slate-800/70 border border-transparent cursor-pointer">
+          <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+          </svg>
+          <span>2. Live Gift-Card Interception Simulator</span>
+          <span class="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-400/40">NEW</span>
+        </button>
+
+        <button onclick="switchMainView('architecture')" id="nav-btn-architecture"
+          class="main-nav-btn flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white hover:bg-slate-800/70 border border-transparent cursor-pointer">
+          <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+          </svg>
+          <span>3. Architecture &amp; Modules (A–G)</span>
+        </button>
+
+        <button onclick="switchMainView('governance')" id="nav-btn-governance"
+          class="main-nav-btn flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white hover:bg-slate-800/70 border border-transparent cursor-pointer">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+          <span>4. Security &amp; Responsible Use</span>
+        </button>
+      </nav>
+
+      <!-- Chain-of-Custody Status -->
+      <div class="hidden lg:flex items-center gap-3 text-[11px] font-mono text-slate-400">
+        <span class="flex items-center gap-1.5 text-emerald-400">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          SHA-256 PROVENANCE LOCKED
+        </span>
+        <span>•</span>
+        <span>SEC. 94 BNSS READY</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       MAIN CONTENT CONTAINER
+       ======================================================================== -->
+  <main class="flex-1 max-w-[1620px] w-full mx-auto px-4 lg:px-6 py-5 space-y-5">
+
+    <!-- ======================================================================
+         VIEW 1: INVESTIGATION WORKSPACE (MULTI-CASE GRAPH + 6-TAB WORKBENCH)
+         ====================================================================== -->
+    <section id="view-workspace" class="space-y-5">
+
+      <!-- TOP CASE SELECTOR & QUICK ACTION BAR -->
+      <div class="cyber-panel rounded-2xl p-3.5 sm:p-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-1 rounded-lg bg-sky-500/15 border border-sky-400/35 text-sky-300 font-mono text-xs font-bold">
+              ACTIVE DOSSIER
+            </span>
+          </div>
+
+          <select id="case-selector" onchange="switchCase(this.value)"
+            class="bg-[#131C31] border border-sky-400/35 text-white text-xs sm:text-sm font-mono font-semibold rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-sky-400 cursor-pointer min-w-[290px] sm:min-w-[490px]">
+            <option value="CASE-RJ-2026-112">CASE-RJ-2026-112 (NEW: Decoy-to-Genuine Amazon Gift Card Interception)</option>
+            <option value="CASE-RJ-2026-084">CASE-RJ-2026-084 (Multi-Hop Mule Fan-Out &amp; Crypto/Brokerage Off-Ramp)</option>
+            <option value="CASE-RJ-2026-051">CASE-RJ-2026-051 (Cross-Case Beneficiary &amp; Phishing Infra Overlap)</option>
+          </select>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2.5">
+          <!-- Launch Gift Card Simulator Quick Button -->
+          <button onclick="switchMainView('simulator')"
+            class="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 border border-rose-400/40 text-rose-300 text-xs sm:text-sm font-semibold transition-all cursor-pointer">
+            <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span>Simulate Gift-Card Attack</span>
+          </button>
+
+          <!-- Simulate CSV/XLSX Import -->
+          <button onclick="openImportModal()"
+            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white text-xs sm:text-sm font-semibold shadow-lg shadow-sky-500/20 transition-all cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+            </svg>
+            <span>Simulate CSV/XLSX Import</span>
+          </button>
+
+          <!-- ReportLab Dossier Preview -->
+          <button onclick="switchWorkbenchTab('report')"
+            class="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-[#131C31] hover:bg-[#1A2642] border border-emerald-400/35 text-emerald-300 text-xs sm:text-sm font-semibold transition-all cursor-pointer">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <span>ReportLab Dossier</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI TELEMETRY STRIP -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+        <div class="cyber-card rounded-2xl p-4">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400">Traced Flow</span>
+            <span class="p-1.5 rounded-lg bg-sky-500/15 text-sky-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </span>
+          </div>
+          <div id="kpi-flow" class="mt-2 text-2xl font-bold font-mono text-sky-300">₹25,000</div>
+          <div id="kpi-flow-sub" class="mt-1 text-[11px] text-slate-400">Paid to Genuine Amazon Pay Gateway</div>
+        </div>
+
+        <div class="cyber-card rounded-2xl p-4">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400">Hop &amp; Cashout Velocity</span>
+            <span class="p-1.5 rounded-lg bg-emerald-500/15 text-emerald-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </span>
+          </div>
+          <div id="kpi-hops" class="mt-2 text-2xl font-bold font-mono text-emerald-300">5 Stages • 94s</div>
+          <div id="kpi-hops-sub" class="mt-1 text-[11px] text-slate-400">Checkout → Code Divert → Wallet Redeem</div>
+        </div>
+
+        <div class="cyber-card rounded-2xl p-4">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400">Cross-Case / Entity Links</span>
+            <span class="p-1.5 rounded-lg bg-amber-500/15 text-amber-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </span>
+          </div>
+          <div id="kpi-matches" class="mt-2 text-2xl font-bold font-mono text-amber-300">2 Mule Clusters</div>
+          <div id="kpi-matches-sub" class="mt-1 text-[11px] text-slate-400">drop.mule88@proton[.]me &amp; Wallet</div>
+        </div>
+
+        <div class="cyber-card rounded-2xl p-4">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400">Infra &amp; Proxy Overlaps</span>
+            <span class="p-1.5 rounded-lg bg-indigo-500/15 text-indigo-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"/></svg>
+            </span>
+          </div>
+          <div id="kpi-infra" class="mt-2 text-2xl font-bold font-mono text-indigo-300">AiTM / 302 Proxy</div>
+          <div id="kpi-infra-sub" class="mt-1 text-[11px] text-slate-400">amz-festive-vouchers[.]in → 185.220.101.44</div>
+        </div>
+
+        <div class="cyber-card rounded-2xl p-4">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400">Evidence Gaps</span>
+            <span class="p-1.5 rounded-lg bg-rose-500/15 text-rose-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            </span>
+          </div>
+          <div id="kpi-gaps" class="mt-2 text-2xl font-bold font-mono text-rose-300">3 Actionable Flags</div>
+          <div id="kpi-gaps-sub" class="mt-1 text-[11px] text-slate-400">Legit Merchant vs. Diverted Claim Code</div>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE MONEY-TRAIL GRAPH + RIGHT-HAND EVIDENCE INSPECTOR -->
+      <div class="grid grid-cols-1 xl:grid-cols-12 gap-5 items-stretch">
+
+        <!-- LEFT/CENTER (8 COLS): MULTI-HOP MONEY-TRAIL & INFRASTRUCTURE GRAPH -->
+        <div class="xl:col-span-8 cyber-panel rounded-2xl flex flex-col overflow-hidden">
+          <div class="px-4 py-3 border-b border-sky-400/15 bg-[#0A101D] flex flex-wrap items-center justify-between gap-2.5">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-sm shadow-sky-400"></span>
+              <h2 class="text-sm font-bold text-white tracking-wide">Multi-Hop Money-Trail &amp; Infrastructure Graph</h2>
+              <span class="hidden sm:inline-block text-[11px] font-mono text-slate-400">(Click node/edge for SHA-256 provenance)</span>
+            </div>
+
+            <!-- Layer Filter Pills -->
+            <div class="flex flex-wrap items-center gap-1.5 text-[11px] font-semibold">
+              <button onclick="setGraphLayer('all')" id="layer-btn-all"
+                class="graph-layer-btn px-2.5 py-1 rounded-lg bg-sky-500/20 text-sky-300 border border-sky-400/40 cursor-pointer">
+                All Layers
+              </button>
+              <button onclick="setGraphLayer('financial')" id="layer-btn-financial"
+                class="graph-layer-btn px-2.5 py-1 rounded-lg bg-[#131C31] text-slate-300 border border-slate-700 hover:border-sky-400/30 cursor-pointer">
+                Financial Trail
+              </button>
+              <button onclick="setGraphLayer('infra')" id="layer-btn-infra"
+                class="graph-layer-btn px-2.5 py-1 rounded-lg bg-[#131C31] text-slate-300 border border-slate-700 hover:border-indigo-400/30 cursor-pointer">
+                Digital Infra
+              </button>
+              <button onclick="setGraphLayer('offramp')" id="layer-btn-offramp"
+                class="graph-layer-btn px-2.5 py-1 rounded-lg bg-[#131C31] text-slate-300 border border-slate-700 hover:border-emerald-400/30 cursor-pointer">
+                Gift-Card &amp; Broker
+              </button>
+            </div>
+          </div>
+
+          <!-- Interactive SVG Canvas -->
+          <div id="graph-viewport" class="relative flex-1 min-h-[480px] sm:min-h-[540px] tactical-grid overflow-hidden select-none cursor-grab active:cursor-grabbing">
+            <svg id="forensic-graph-svg" class="w-full h-full min-h-[480px] sm:min-h-[540px]" viewBox="0 0 980 560" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <marker id="arrow-cyan" viewBox="0 0 10 10" refX="26" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#38BDF8" />
+                </marker>
+                <marker id="arrow-crimson" viewBox="0 0 10 10" refX="26" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#F43F5E" />
+                </marker>
+                <marker id="arrow-amber" viewBox="0 0 10 10" refX="26" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#F59E0B" />
+                </marker>
+                <marker id="arrow-indigo" viewBox="0 0 10 10" refX="24" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#818CF8" />
+                </marker>
+                <marker id="arrow-emerald" viewBox="0 0 10 10" refX="24" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#10B981" />
+                </marker>
+
+                <filter id="cyber-glow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="3.5" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
+
+              <g id="graph-pan-zoom-group" transform="translate(0,0) scale(1)">
+                <g id="graph-edges-layer"></g>
+                <g id="graph-nodes-layer"></g>
+              </g>
+            </svg>
+
+            <!-- Viewport Controls -->
+            <div class="absolute bottom-3 right-3 flex items-center gap-1.5 bg-[#0F172A]/90 backdrop-blur border border-sky-400/25 rounded-xl p-1.5 shadow-lg">
+              <button onclick="zoomGraph(0.15)" title="Zoom In" class="p-1.5 rounded-lg hover:bg-sky-500/20 text-slate-300 hover:text-sky-300 cursor-pointer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              </button>
+              <button onclick="zoomGraph(-0.15)" title="Zoom Out" class="p-1.5 rounded-lg hover:bg-sky-500/20 text-slate-300 hover:text-sky-300 cursor-pointer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>
+              </button>
+              <button onclick="resetGraphTransform()" title="Reset Viewport" class="px-2 py-1 rounded-lg hover:bg-sky-500/20 text-[11px] font-mono text-slate-300 hover:text-sky-300 cursor-pointer">
+                RESET
+              </button>
+            </div>
+
+            <!-- Semantic Legend -->
+            <div class="absolute bottom-3 left-3 bg-[#0F172A]/90 backdrop-blur border border-sky-400/20 rounded-xl px-3 py-2 text-[11px] max-w-[280px] sm:max-w-none">
+              <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span class="inline-flex items-center gap-1.5 text-slate-300"><span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>Bank / Merchant</span>
+                <span class="inline-flex items-center gap-1.5 text-slate-300"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>Threat / Mule</span>
+                <span class="inline-flex items-center gap-1.5 text-slate-300"><span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>Gift-Card / Wallet</span>
+                <span class="inline-flex items-center gap-1.5 text-slate-300"><span class="w-2.5 h-2.5 rounded-full bg-indigo-400"></span>Decoy Domain / IP</span>
+                <span class="inline-flex items-center gap-1.5 text-slate-300"><span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>Diverted Code / Gap</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT (4 COLS): EVIDENCE & PROVENANCE INSPECTOR DRAWER -->
+        <aside class="xl:col-span-4 cyber-panel rounded-2xl flex flex-col justify-between overflow-hidden">
+          <div>
+            <div class="px-4 py-3 border-b border-sky-400/15 bg-[#0A101D] flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+                <h2 class="text-sm font-bold text-white">Evidence &amp; Provenance Inspector</h2>
+              </div>
+              <span id="inspector-status-badge" class="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-rose-500/15 text-rose-300 border border-rose-400/35">
+                ACTIVE LEAD
+              </span>
+            </div>
+
+            <div id="inspector-body" class="p-4 space-y-4">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Tamper-Evident Investigator Audit Log -->
+          <div class="p-3.5 bg-[#090E1A] border-t border-slate-800/90">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400">Investigator Disposition Audit Log</span>
+              <span class="text-[10px] font-mono text-emerald-400">TAMPER-EVIDENT</span>
+            </div>
+            <div id="audit-log-list" class="space-y-1 max-h-[88px] overflow-y-auto text-[11px] font-mono text-slate-300">
+              <div class="text-slate-400">• [22:31:00 IST] Synthetic datasets verified via SHA-256.</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- ====================================================================
+           6-TAB FORENSICS WORKBENCH (MODULES A, C, D, E, F, G + REPORTLAB)
+           ==================================================================== -->
+      <div class="cyber-panel rounded-2xl overflow-hidden">
+        <div class="px-3 sm:px-4 pt-3 border-b border-sky-400/15 bg-[#0A101D] flex flex-wrap items-center gap-1.5">
+          <button onclick="switchWorkbenchTab('ledger')" id="wb-tab-ledger"
+            class="wb-tab-btn px-3.5 py-2.5 rounded-t-xl text-xs font-semibold border-b-2 border-sky-400 text-sky-300 bg-[#131C31] cursor-pointer">
+            Tab A: Financial Ledger (Mod A)
+          </button>
+          <button onclick="switchWorkbenchTab('infra')" id="wb-tab-infra"
+            class="wb-tab-btn px-3.5 py-2.5 rounded-t-xl text-xs font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200 cursor-pointer">
+            Tab B: Infra Correlation (Mod C)
+          </button>
+          <button onclick="switchWorkbenchTab('crosscase')" id="wb-tab-crosscase"
+            class="wb-tab-btn px-3.5 py-2.5 rounded-t-xl text-xs font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200 cursor-pointer">
+            Tab C: Cross-Case Intelligence (Mod D)
+          </button>
+          <button onclick="switchWorkbenchTab('chains')" id="wb-tab-chains"
+            class="wb-tab-btn px-3.5 py-2.5 rounded-t-xl text-xs font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200 cursor-pointer">
+            Tab D: Gift-Card &amp; Broker Chains (Mod E &amp; F)
+          </button>
+          <button onclick="switchWorkbenchTab('gaps')" id="wb-tab-gaps"
+            class="wb-tab-btn px-3.5 py-2.5 rounded-t-xl text-xs font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200 cursor-pointer">
+            Tab E: Investigation Gap Finder (Mod G)
+          </button>
+          <button onclick="switchWorkbenchTab('report')" id="wb-tab-report"
+            class="wb-tab-btn px-3.5 py-2.5 rounded-t-xl text-xs font-semibold border-b-2 border-transparent text-emerald-400 hover:text-emerald-300 cursor-pointer">
+            Tab F: ReportLab Dossier &amp; Sec. 94 BNSS
+          </button>
+        </div>
+
+        <!-- TAB A: FINANCIAL LEDGER (MODULE A) -->
+        <div id="wb-panel-ledger" class="wb-panel p-4 space-y-4">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div>
+              <h3 class="text-sm font-bold text-white">Standardized &amp; Validated Transaction Ledger (Pandas Normalization Engine)</h3>
+              <p class="text-xs text-slate-400">Click any row to inspect its SHA-256 provenance and focus the corresponding node in the Money-Trail Graph.</p>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <input id="ledger-search" type="text" oninput="renderLedgerTable()" placeholder="Search Account, UTR, Merchant..."
+                class="bg-[#131C31] border border-sky-400/25 rounded-xl px-3 py-1.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-sky-400 w-56" />
+              <select id="ledger-filter" onchange="renderLedgerTable()"
+                class="bg-[#131C31] border border-sky-400/25 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-sky-400">
+                <option value="all">All Statuses</option>
+                <option value="VALIDATED">Validated (SHA-256)</option>
+                <option value="FLAGGED">Flagged Velocity / Redirect</option>
+                <option value="OFFRAMP">Off-Ramp / Redemption</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto rounded-xl border border-slate-800">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="bg-[#0A101D] text-slate-400 font-mono uppercase text-[11px] border-b border-slate-800">
+                  <th class="py-3 px-3">Stage</th>
+                  <th class="py-3 px-3">Timestamp (IST)</th>
+                  <th class="py-3 px-3">Source Entity</th>
+                  <th class="py-3 px-3">Destination / Merchant</th>
+                  <th class="py-3 px-3 text-right">Amount (₹)</th>
+                  <th class="py-3 px-3">Mode &amp; Ref</th>
+                  <th class="py-3 px-3">Status</th>
+                  <th class="py-3 px-3">Source Record</th>
+                </tr>
+              </thead>
+              <tbody id="ledger-tbody" class="divide-y divide-slate-800/70 font-mono">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB B: DIGITAL INFRASTRUCTURE CORRELATION (MODULE C) -->
+        <div id="wb-panel-infra" class="wb-panel hidden p-4 space-y-4">
+          <div class="rounded-xl bg-amber-500/10 border border-amber-400/35 p-3.5 flex items-start gap-3">
+            <svg class="w-5 h-5 text-amber-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+            <div class="text-xs text-amber-200/90 leading-relaxed">
+              <strong class="text-amber-300 font-semibold">RESPONSIBLE USE &amp; ATTRIBUTION GUARDRAIL:</strong> Shared IP addresses, HTTP redirect headers, hosting ASNs, or nameserver configurations represent technical infrastructure observations and <strong>must not be treated as standalone proof of identity or guilt</strong> without lawful ISP/registrar/merchant records.
+            </div>
+          </div>
+
+          <div class="overflow-x-auto rounded-xl border border-slate-800">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="bg-[#0A101D] text-slate-400 font-mono uppercase text-[11px] border-b border-slate-800">
+                  <th class="py-3 px-4">Infrastructure &amp; Redirect Artifact</th>
+                  <th class="py-3 px-4 text-rose-300">CASE-RJ-2026-112 (Gift-Card Proxy)</th>
+                  <th class="py-3 px-4 text-sky-300">CASE-RJ-2026-084 / 051 (Phishing)</th>
+                  <th class="py-3 px-4">Forensic Correlation</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800/80 font-mono">
+                <tr class="hover:bg-[#131C31]/60">
+                  <td class="py-3 px-4 font-sans font-semibold text-slate-300">Decoy / Lure Domain</td>
+                  <td class="py-3 px-4 text-rose-300 font-bold">amz-festive-vouchers[.]in</td>
+                  <td class="py-3 px-4 text-sky-300">rbi-kyc-verify[.]in / rbi-card-update[.]in</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 border border-rose-400/30">Co-Hosted Threat Campaign</span></td>
+                </tr>
+                <tr class="hover:bg-[#131C31]/60">
+                  <td class="py-3 px-4 font-sans font-semibold text-slate-300">HTTP 302 Location / Proxy Header</td>
+                  <td class="py-3 px-4 text-amber-300">302 → amazon.in/...?recipientEmail=drop.mule88@proton[.]me</td>
+                  <td class="py-3 px-4 text-slate-300">/portal/ekyc-pan-link.php</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-400/30">Recipient Parameter Injection</span></td>
+                </tr>
+                <tr class="hover:bg-[#131C31]/60">
+                  <td class="py-3 px-4 font-sans font-semibold text-slate-300">Resolved DNS A-Record (IPv4)</td>
+                  <td class="py-3 px-4 text-rose-300 font-bold">185.220.101.44</td>
+                  <td class="py-3 px-4 text-rose-300 font-bold">185.220.101.44</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-indigo-500/15 text-indigo-300 border border-indigo-400/30">EXACT IP OVERLAP (AS205100)</span></td>
+                </tr>
+                <tr class="hover:bg-[#131C31]/60">
+                  <td class="py-3 px-4 font-sans font-semibold text-slate-300">Authoritative Nameservers</td>
+                  <td class="py-3 px-4 text-slate-200">ns1.cloud-shield-dns[.]net</td>
+                  <td class="py-3 px-4 text-slate-200">ns1.cloud-shield-dns[.]net</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-indigo-500/15 text-indigo-300 border border-indigo-400/30">EXACT NS OVERLAP</span></td>
+                </tr>
+                <tr class="hover:bg-[#131C31]/60">
+                  <td class="py-3 px-4 font-sans font-semibold text-slate-300">Hosting ASN / Network Block</td>
+                  <td class="py-3 px-4 text-slate-300">AS205100 • Offshore Bulletproof VPS</td>
+                  <td class="py-3 px-4 text-slate-300">AS205100 • Offshore Bulletproof VPS</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-sky-500/15 text-sky-300 border border-sky-400/30">Shared Hosting Infrastructure</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB C: CROSS-CASE INTELLIGENCE (MODULE D) -->
+        <div id="wb-panel-crosscase" class="wb-panel hidden p-4 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <div>
+              <h3 class="text-sm font-bold text-white">Explainable Cross-Case Relationship Discovery (Exact Identifiers &amp; Cautious RapidFuzz)</h3>
+              <p class="text-xs text-slate-400">Every suggested link exposes transparent scoring components and requires human investigator verification.</p>
+            </div>
+            <span class="px-2.5 py-1 rounded-lg bg-indigo-500/15 border border-indigo-400/30 text-indigo-300 font-mono text-[11px]">
+              RapidFuzz Guardrail Threshold: ≥ 85.0%
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <!-- Card 1: Gift Card Mule Cluster -->
+            <div class="cyber-card rounded-2xl p-4 space-y-3 border-l-4 border-l-rose-500">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 border border-rose-400/30">
+                    GIFT-CARD CLUSTER • 96.2%
+                  </span>
+                  <h4 class="mt-1.5 text-sm font-bold text-white">drop.mule88@proton[.]me</h4>
+                  <p class="text-[11px] font-mono text-slate-400">CASE-RJ-2026-112 ↔ 3 Prior Voucher Claims</p>
+                </div>
+              </div>
+
+              <div class="space-y-2 text-xs">
+                <div>
+                  <div class="flex justify-between font-mono text-[11px] mb-1">
+                    <span class="text-slate-400">Exact Recipient Alias &amp; Wallet Link</span>
+                    <span class="text-emerald-400 font-bold">100.0%</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                    <div class="h-full bg-emerald-400 rounded-full" style="width: 100%"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between font-mono text-[11px] mb-1">
+                    <span class="text-slate-400">Redirect Proxy IP (185.220.101.44)</span>
+                    <span class="text-rose-300 font-bold">92.4%</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                    <div class="h-full bg-rose-400 rounded-full" style="width: 92.4%"></div>
+                  </div>
+                </div>
+              </div>
+
+              <p class="text-[11px] text-slate-300 bg-[#0A101D] p-2.5 rounded-xl border border-slate-800">
+                <strong>Explanation:</strong> Diverted Amazon claim code <code>GC-9941-AMZ</code> delivered to proton.me drop inbox and redeemed into wallet <code>AMZ-WLT-884920</code> in 94s.
+              </p>
+
+              <div class="flex items-center justify-between pt-1">
+                <span id="cc-status-1" class="text-[11px] font-mono text-emerald-400">Status: VERIFIED LEAD</span>
+                <button onclick="toggleCrossCaseReview(1)"
+                  class="px-3 py-1.5 rounded-lg bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 border border-sky-400/35 text-xs font-semibold cursor-pointer">
+                  Toggle Review
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 2: RapidFuzz Beneficiary Match -->
+            <div class="cyber-card rounded-2xl p-4 space-y-3 border-l-4 border-l-amber-400">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-400/30">
+                    HYBRID MATCH • 94.6% COMPOSITE
+                  </span>
+                  <h4 class="mt-1.5 text-sm font-bold text-white">S. Meena ↔ Suresh Meena</h4>
+                  <p class="text-[11px] font-mono text-slate-400">ACC-7734 (Case 084) ↔ ACC-3109 (Case 051)</p>
+                </div>
+              </div>
+
+              <div class="space-y-2 text-xs">
+                <div>
+                  <div class="flex justify-between font-mono text-[11px] mb-1">
+                    <span class="text-slate-400">Exact Beneficiary Phone SHA-256</span>
+                    <span class="text-emerald-400 font-bold">100.0%</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                    <div class="h-full bg-emerald-400 rounded-full" style="width: 100%"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between font-mono text-[11px] mb-1">
+                    <span class="text-slate-400">RapidFuzz Token-Set Name Score</span>
+                    <span class="text-amber-300 font-bold">91.4%</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                    <div class="h-full bg-amber-400 rounded-full" style="width: 91.4%"></div>
+                  </div>
+                </div>
+              </div>
+
+              <p class="text-[11px] text-slate-300 bg-[#0A101D] p-2.5 rounded-xl border border-slate-800">
+                <strong>Explanation:</strong> Initials expansion ("S." → "Suresh") combined with identical salted SHA-256 hash of registered mobile (+91-9829XXXXXX).
+              </p>
+
+              <div class="flex items-center justify-between pt-1">
+                <span id="cc-status-2" class="text-[11px] font-mono text-amber-300">Status: NEEDS REVIEW</span>
+                <button onclick="toggleCrossCaseReview(2)"
+                  class="px-3 py-1.5 rounded-lg bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 border border-sky-400/35 text-xs font-semibold cursor-pointer">
+                  Toggle Review
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 3: Cautious Quarantine Example -->
+            <div class="cyber-card rounded-2xl p-4 space-y-3 border-l-4 border-l-slate-600">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-slate-700/60 text-slate-300 border border-slate-600">
+                    CAUTIOUS HOLD • 74.2% (QUARANTINED)
+                  </span>
+                  <h4 class="mt-1.5 text-sm font-bold text-white">Apex Digital ↔ Apex Digitech</h4>
+                  <p class="text-[11px] font-mono text-slate-400">ACC-4410 (Case 084) ↔ ACC-1190 (Case 039)</p>
+                </div>
+              </div>
+
+              <div class="space-y-2 text-xs">
+                <div>
+                  <div class="flex justify-between font-mono text-[11px] mb-1">
+                    <span class="text-slate-400">RapidFuzz Partial Ratio</span>
+                    <span class="text-slate-300 font-bold">74.2%</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                    <div class="h-full bg-slate-400 rounded-full" style="width: 74.2%"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between font-mono text-[11px] mb-1">
+                    <span class="text-slate-400">GSTIN / PAN / IFSC Overlap</span>
+                    <span class="text-rose-400 font-bold">0.0%</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                    <div class="h-full bg-rose-400 rounded-full" style="width: 4%"></div>
+                  </div>
+                </div>
+              </div>
+
+              <p class="text-[11px] text-slate-300 bg-[#0A101D] p-2.5 rounded-xl border border-slate-800">
+                <strong>Guardrail Explanation:</strong> Common commercial prefix without shared PAN, GSTIN, or device hash. Auto-quarantined to prevent false linkage.
+              </p>
+
+              <div class="flex items-center justify-between pt-1">
+                <span id="cc-status-3" class="text-[11px] font-mono text-slate-400">Status: QUARANTINED</span>
+                <button onclick="toggleCrossCaseReview(3)"
+                  class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-600 text-xs font-semibold cursor-pointer">
+                  Toggle Review
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB D: GIFT-CARD & SECURITIES EVENT CHAINS (MODULES E & F) -->
+        <div id="wb-panel-chains" class="wb-panel hidden p-4 space-y-5">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            
+            <!-- Module E: Decoy-to-Genuine Amazon Gift-Card Chain (Case 112) -->
+            <div class="cyber-card rounded-2xl p-4 space-y-4 border-t-4 border-t-rose-500">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div>
+                  <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 border border-rose-400/30">MODULE E • CASE-RJ-2026-112</span>
+                  <h3 class="mt-1 text-sm font-bold text-white">Decoy-to-Genuine Amazon Gift-Card Chain (₹25,000)</h3>
+                </div>
+                <span class="text-xs font-mono text-emerald-300">4-Stage Chain Reconstructed</span>
+              </div>
+
+              <ol class="relative border-l-2 border-slate-700 ml-3 space-y-3.5 text-xs">
+                <li class="ml-5">
+                  <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 rounded-full bg-sky-500/20 border border-sky-400 text-sky-300 font-mono text-[10px]">1</span>
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-white">Purchase Event (Genuine Amazon Pay India)</span>
+                    <span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 font-mono text-[10px]">15:10:04 IST</span>
+                  </div>
+                  <p class="text-slate-400 mt-0.5">Victim paid ₹25,000 via UPI (#432910884120) directly to genuine merchant <code>Amazon Pay India Pvt Ltd</code> after redirect from <code>amz-festive-vouchers[.]in</code>.</p>
+                </li>
+
+                <li class="ml-5">
+                  <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 rounded-full bg-indigo-500/20 border border-indigo-400 text-indigo-300 font-mono text-[10px]">2</span>
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-white">Digital Delivery &amp; Claim Code Generation</span>
+                    <span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 font-mono text-[10px]">15:10:41 IST</span>
+                  </div>
+                  <p class="text-slate-400 mt-0.5">E-Gift Card Voucher <code>GC-9941-AMZ</code> (Claim Code: <code>8X9K-M2P74Q-Z91L</code>) issued by Amazon system.</p>
+                </li>
+
+                <li class="ml-5">
+                  <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 rounded-full bg-amber-500/20 border border-amber-400 text-amber-300 font-mono text-[10px]">3</span>
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-amber-300">Diverted Recipient Identifier</span>
+                    <span class="px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 font-mono text-[10px]">HIJACKED</span>
+                  </div>
+                  <p class="text-slate-300 mt-0.5">Pre-filled URL parameter / AiTM proxy routed voucher delivery to attacker inbox <code class="text-amber-300">drop.mule88@proton[.]me</code> instead of victim.</p>
+                </li>
+
+                <li class="ml-5">
+                  <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 rounded-full bg-rose-500/20 border border-rose-400 text-rose-300 font-mono text-[10px]">4</span>
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-rose-300">Redemption &amp; Electronics Liquidation (94s)</span>
+                    <span class="px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 font-mono text-[10px]">15:12:15 IST</span>
+                  </div>
+                  <p class="text-slate-400 mt-0.5">Redeemed into wallet <code>AMZ-WLT-884920</code> within 94 seconds; spent on Order <code>#408-992140</code> (high-value smartphone liquidation).</p>
+                </li>
+              </ol>
+            </div>
+
+            <!-- Module F: Securities & Broker Transaction Analysis (Case 084) -->
+            <div class="cyber-card rounded-2xl p-4 space-y-4 border-t-4 border-t-sky-400">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div>
+                  <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-sky-500/15 text-sky-300 border border-sky-400/30">MODULE F • CASE-RJ-2026-084</span>
+                  <h3 class="mt-1 text-sm font-bold text-white">Securities &amp; Broker Off-Ramp Chain (₹6,50,000)</h3>
+                </div>
+                <span class="text-xs font-mono text-sky-300">Authorised Broker Extract</span>
+              </div>
+
+              <ol class="relative border-l-2 border-slate-700 ml-3 space-y-3.5 text-xs">
+                <li class="ml-5">
+                  <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-400 text-emerald-300 font-mono text-[10px]">1</span>
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-white">Bank Deposit to Broker Escrow</span>
+                    <span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 font-mono text-[10px]">VERIFIED</span>
+                  </div>
+                  <p class="text-slate-400 mt-0.5">RTGS #UTR883219 of ₹6,50,000 from ACC-7728 (K. Verma) to AlphaTrade Client Pool.</p>
+                </li>
+
+                <li class="ml-5">
+                  <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-400 text-emerald-300 font-mono text-[10px]">2</span>
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-white">Broker Account Credit (Client ID: AT-88412)</span>
+                    <span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 font-mono text-[10px]">VERIFIED</span>
+                  </div>
+                  <p class="text-slate-400 mt-0.5">Mapped to trading ledger <code>AlphaTrade_Ledger_084.xlsx</code> (Row #19).</p>
+                </li>
+
+                <li class="ml-5">
+                  <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 rounded-full bg-sky-500/20 border border-sky-400 text-sky-300 font-mono text-[10px]">3</span>
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-white">Rapid Intraday Trade Execution (#TR-904)</span>
+                    <span class="px-2 py-0.5 rounded bg-sky-500/15 text-sky-300 font-mono text-[10px]">LAYERED TRADE</span>
+                  </div>
+                  <p class="text-slate-400 mt-0.5">Wash buy/sell cycle of ₹6,42,500 within 18 minutes of margin credit.</p>
+                </li>
+
+                <li class="ml-5">
+                  <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 rounded-full bg-amber-500/20 border border-amber-400 text-amber-300 font-mono text-[10px]">!</span>
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-amber-300">Settlement Payout Hold &amp; 14m Drift</span>
+                    <span class="px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 font-mono text-[10px]">FROZEN</span>
+                  </div>
+                  <p class="text-slate-400 mt-0.5">T+1 payout of ₹6,39,100 frozen; 14-minute timestamp contradiction logged in Gap Finder.</p>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB E: INVESTIGATION GAP FINDER (MODULE G) -->
+        <div id="wb-panel-gaps" class="wb-panel hidden p-4 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <div>
+              <h3 class="text-sm font-bold text-white">Investigation Gap Finder &amp; Contradiction Engine (Module G)</h3>
+              <p class="text-xs text-slate-400">Detects missing merchant logs, genuine-merchant blind spots, and cross-system timestamp anomalies.</p>
+            </div>
+            <span class="px-2.5 py-1 rounded-lg bg-rose-500/15 border border-rose-400/30 text-rose-300 font-mono text-[11px] font-semibold">
+              3 HIGH-PRIORITY GAPS DETECTED
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Gap 1: Gift Card Blind Spot -->
+            <div class="cyber-card rounded-2xl p-4 border-l-4 border-l-rose-500 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 border border-rose-400/30">MERCHANT BLIND SPOT</span>
+                <span class="text-[11px] font-mono text-slate-400">GAP-112-01</span>
+              </div>
+              <h4 class="text-sm font-bold text-white">Legitimate Merchant Bank Entry vs. Unverified Voucher Recipient</h4>
+              <p class="text-xs text-slate-300">Bank statement shows a genuine ₹25,000 payment to <code>Amazon Pay India Pvt Ltd</code>, masking that the e-gift card claim code was delivered to <code>drop.mule88@proton[.]me</code>.</p>
+              <div class="pt-1 text-[11px] font-mono text-emerald-300">
+                → Action: Requisition Amazon Merchant Order, Recipient Email &amp; Redemption Wallet KYC under Sec. 94 BNSS.
+              </div>
+            </div>
+
+            <!-- Gap 2: Delivery Address & Device Fingerprint -->
+            <div class="cyber-card rounded-2xl p-4 border-l-4 border-l-amber-400 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-400/30">LIQUIDATION TRACE GAP</span>
+                <span class="text-[11px] font-mono text-slate-400">GAP-112-02</span>
+              </div>
+              <h4 class="text-sm font-bold text-white">Shipping Address &amp; Redemption IP for Order #408-992140</h4>
+              <p class="text-xs text-slate-300">Wallet <code>AMZ-WLT-884920</code> redeemed <code>GC-9941-AMZ</code> within 94s to purchase electronics. Delivery drop address and redemption login IP are required to identify the physical receiver.</p>
+              <div class="pt-1 text-[11px] font-mono text-emerald-300">
+                → Action: Request Order #408-992140 shipping manifest, delivery OTP mobile &amp; login IP logs.
+              </div>
+            </div>
+
+            <!-- Gap 3: Timestamp Drift in Case 084 -->
+            <div class="cyber-card rounded-2xl p-4 border-l-4 border-l-indigo-400 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-indigo-500/15 text-indigo-300 border border-indigo-400/30">TIMESTAMP CONTRADICTION</span>
+                <span class="text-[11px] font-mono text-slate-400">GAP-084-02</span>
+              </div>
+              <h4 class="text-sm font-bold text-white">14-Minute Discrepancy: Bank RTGS vs. Broker Credit</h4>
+              <p class="text-xs text-slate-300">ACC-7728 RTGS debit is logged at <code>14:12:08 IST</code>, whereas AlphaTrade broker ledger records margin credit at <code>13:58:02 IST</code> (14m 06s earlier).</p>
+              <div class="pt-1 text-[11px] font-mono text-emerald-300">
+                → Action: Request UTC-normalized server audit log &amp; UTR settlement confirmation.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB F: PRINTABLE REPORTLAB DOSSIER & SEC. 94 BNSS DRAFT -->
+        <div id="wb-panel-report" class="wb-panel hidden p-4 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 no-print">
+            <div>
+              <h3 class="text-sm font-bold text-white">ReportLab-Style Investigation Dossier &amp; Section 94 BNSS Requisition Preview</h3>
+              <p class="text-xs text-slate-400">Auto-compiles case evidence, SHA-256 chain-of-custody hashes, and merchant log requisition text.</p>
+            </div>
+            <button onclick="window.print()"
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs sm:text-sm shadow-lg shadow-emerald-500/20 transition-all cursor-pointer">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+              </svg>
+              <span>Print / Save PDF Dossier</span>
+            </button>
+          </div>
+
+          <div id="printable-dossier" class="bg-white text-slate-900 rounded-2xl p-6 sm:p-8 shadow-2xl max-w-4xl mx-auto space-y-5 border border-slate-300">
+            <div class="border-b-2 border-slate-900 pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div>
+                <div class="text-[11px] font-mono font-bold uppercase tracking-widest text-slate-600">
+                  RAJASTHAN POLICE CYBER SECURITY HACKATHON 2026 • PS05 PROTOTYPE
+                </div>
+                <h2 class="text-xl font-extrabold text-slate-950 mt-0.5">FINTRACE X — EVIDENCE-LINKED INVESTIGATION DOSSIER</h2>
+                <p class="text-xs text-slate-600 mt-0.5">Generated via ReportLab Engine • Classification: SYNTHETIC DEMONSTRATION RECORD</p>
+              </div>
+              <div class="text-left sm:text-right font-mono text-xs bg-slate-100 p-2.5 rounded-lg border border-slate-300">
+                <div><strong>CASE ID:</strong> <span id="rep-case-id">CASE-RJ-2026-112</span></div>
+                <div><strong>DATE:</strong> 24 NOV 2026 (IST)</div>
+                <div><strong>PROVENANCE:</strong> SHA-256 VERIFIED</div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <div><strong class="text-slate-600">Team:</strong> <span id="rep-team" class="font-mono font-semibold">[Team Name]</span></div>
+              <div><strong class="text-slate-600">College:</strong> <span id="rep-college" class="font-mono font-semibold">[College Name]</span></div>
+              <div><strong class="text-slate-600">Members:</strong> <span id="rep-members" class="font-mono">[Names]</span></div>
+            </div>
+
+            <div class="space-y-1.5">
+              <h3 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-700 border-b border-slate-300 pb-1">
+                1. Executive Case Findings
+              </h3>
+              <p id="rep-summary-text" class="text-xs text-slate-800 leading-relaxed">
+                Investigation under <strong>CASE-RJ-2026-112</strong> uncovered a Decoy-to-Genuine Gift Card Interception scheme. The victim was lured to <code>amz-festive-vouchers[.]in</code> (hosted on <code>185.220.101.44</code>) and transparently redirected to genuine <code>amazon.in</code> checkout with an attacker-controlled recipient parameter (<code>drop.mule88@proton[.]me</code>). While the victim's bank statement reflects a legitimate ₹25,000 payment to <code>Amazon Pay India Pvt Ltd</code>, claim code <code>GC-9941-AMZ</code> was diverted and redeemed into wallet <code>AMZ-WLT-884920</code> within 94 seconds.
+              </p>
+            </div>
+
+            <div class="space-y-2">
+              <h3 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-700 border-b border-slate-300 pb-1">
+                2. Chain-of-Custody Evidence Manifest (SHA-256)
+              </h3>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-[11px] font-mono">
+                  <thead>
+                    <tr class="bg-slate-100 border-y border-slate-300 text-slate-700">
+                      <th class="py-2 px-2">Stage</th>
+                      <th class="py-2 px-2">From → To</th>
+                      <th class="py-2 px-2 text-right">Amount</th>
+                      <th class="py-2 px-2">Source Record</th>
+                      <th class="py-2 px-2">SHA-256 Prefix</th>
+                    </tr>
+                  </thead>
+                  <tbody id="rep-manifest-tbody" class="divide-y divide-slate-200">
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <h3 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-700 border-b border-slate-300 pb-1">
+                3. Lawful Requisition Draft (Section 94 BNSS — Merchant &amp; Issuer Logs)
+              </h3>
+              <div class="bg-slate-50 p-3 rounded-lg border border-slate-300 text-[11px] font-mono text-slate-800 leading-relaxed">
+                <strong>TO:</strong> Nodal Officer – Law Enforcement Response Team, Amazon Pay (India) Pvt. Ltd.<br/>
+                <strong>SUBJECT:</strong> Requisition under Section 94 BNSS for E-Gift Card Order &amp; Redemption Records (Synthetic Ref: CASE-RJ-2026-112)<br/>
+                <strong>REQUIRED RECORDS:</strong> (1) Complete order metadata &amp; recipient email/phone for UPI Ref #432910884120 (₹25,000 on 2026-11-22 15:10:04 IST); (2) Redemption timestamp, Wallet ID (AMZ-WLT-884920), login IP logs, and KYC details for Voucher GC-9941-AMZ; (3) Shipping address &amp; receiver contact for liquidation Order #408-992140.
+              </div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-300 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-[11px] font-mono text-slate-600">
+              <span>HUMAN-IN-THE-LOOP ATTESTATION: REVIEWED BY INVESTIGATING OFFICER</span>
+              <span>FINTRACE X • PS05 SYNTHETIC DEMO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VIEW 2: LIVE GIFT-CARD INTERCEPTION SIMULATOR (NEW DEDICATED TAB)
+         ====================================================================== -->
+    <section id="view-simulator" class="hidden space-y-5">
+
+      <!-- Simulator Header & Playback Control Bar -->
+      <div class="cyber-panel rounded-2xl p-4 sm:p-5 space-y-4 border-t-4 border-t-rose-500">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+          <div>
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase bg-rose-500/20 text-rose-300 border border-rose-400/40">
+                LIVE ATTACK &amp; FORENSICS SIMULATOR • CASE-RJ-2026-112
+              </span>
+              <span class="px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase bg-sky-500/15 text-sky-300 border border-sky-400/35">
+                DECOY-TO-GENUINE MERCHANT INTERCEPTION
+              </span>
+            </div>
+            <h2 class="mt-1.5 text-lg sm:text-xl font-extrabold text-white">
+              How Decoy Gift-Card Scams Hijack Genuine Amazon Checkouts — And How FINTRACE X Exposes Them
+            </h2>
+            <p class="text-xs text-slate-400 mt-0.5">
+              Compare <strong>Surface Reality (What the Victim &amp; Bank See)</strong> against the <strong>Hidden Proxy/Redirect Layer (What the Attacker Captures)</strong> across 5 synchronized stages.
+            </p>
+          </div>
+
+          <!-- Attack Vector Mode Switcher + Playback Buttons -->
+          <div class="flex flex-wrap items-center gap-2">
+            <select id="sim-vector-mode" onchange="renderSimulatorStep()"
+              class="bg-[#131C31] border border-indigo-400/35 rounded-xl px-3 py-2 text-xs font-mono text-indigo-200 focus:outline-none">
+              <option value="param">Mechanism A: Pre-Filled Recipient URL Injection</option>
+              <option value="aitm">Mechanism B: AiTM Reverse Proxy Claim-Code Capture</option>
+            </select>
+
+            <button id="sim-autoplay-btn" onclick="toggleSimAutoPlay()"
+              class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs shadow-lg shadow-emerald-500/20 transition-all cursor-pointer">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg>
+              <span id="sim-autoplay-label">Play Auto-Simulation</span>
+            </button>
+
+            <button onclick="prevSimStep()"
+              class="px-3 py-2 rounded-xl bg-[#131C31] hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-semibold cursor-pointer">
+              ← Prev
+            </button>
+
+            <button onclick="nextSimStep()"
+              class="px-3.5 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 text-xs font-bold cursor-pointer">
+              Next Step →
+            </button>
+          </div>
+        </div>
+
+        <!-- 5-Step Interactive Stepper Bar -->
+        <div class="grid grid-cols-1 sm:grid-cols-5 gap-2 pt-1" id="sim-stepper-bar">
+          <button onclick="setSimStep(1)" id="sim-step-pill-1" class="sim-step-pill text-left p-2.5 rounded-xl border transition-all cursor-pointer">
+            <div class="text-[10px] font-mono font-bold">STEP 01</div>
+            <div class="text-xs font-semibold truncate">Decoy Lure Portal</div>
+          </button>
+          <button onclick="setSimStep(2)" id="sim-step-pill-2" class="sim-step-pill text-left p-2.5 rounded-xl border transition-all cursor-pointer">
+            <div class="text-[10px] font-mono font-bold">STEP 02</div>
+            <div class="text-xs font-semibold truncate">Redirect / AiTM Proxy</div>
+          </button>
+          <button onclick="setSimStep(3)" id="sim-step-pill-3" class="sim-step-pill text-left p-2.5 rounded-xl border transition-all cursor-pointer">
+            <div class="text-[10px] font-mono font-bold">STEP 03</div>
+            <div class="text-xs font-semibold truncate">Genuine Amazon Payment</div>
+          </button>
+          <button onclick="setSimStep(4)" id="sim-step-pill-4" class="sim-step-pill text-left p-2.5 rounded-xl border transition-all cursor-pointer">
+            <div class="text-[10px] font-mono font-bold">STEP 04</div>
+            <div class="text-xs font-semibold truncate">Claim Code Diverted (94s)</div>
+          </button>
+          <button onclick="setSimStep(5)" id="sim-step-pill-5" class="sim-step-pill text-left p-2.5 rounded-xl border transition-all cursor-pointer">
+            <div class="text-[10px] font-mono font-bold">STEP 05</div>
+            <div class="text-xs font-semibold truncate">FINTRACE X &amp; 94 BNSS</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- DUAL-VIEW SYNCHRONIZED VISUAL CANVAS -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+
+        <!-- LEFT STREAM (6 COLS): WHAT THE VICTIM SEES (SURFACE REALITY) -->
+        <div class="lg:col-span-6 cyber-panel rounded-2xl overflow-hidden flex flex-col border-t-4 border-t-sky-400">
+          <div class="px-4 py-3 bg-[#0A101D] border-b border-sky-400/15 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
+              <h3 class="text-sm font-bold text-white">What the Victim Sees (Surface Reality)</h3>
+            </div>
+            <span id="sim-victim-badge" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-sky-500/15 text-sky-300 border border-sky-400/35">
+              APPEARS 100% LEGITIMATE
+            </span>
+          </div>
+
+          <!-- Simulated Browser Window -->
+          <div class="p-4 flex-1 flex flex-col justify-between space-y-4 bg-[#0B1221]">
+            <!-- Browser Chrome & Live URL Bar -->
+            <div class="rounded-xl border border-slate-700/90 bg-[#0F172A] overflow-hidden shadow-inner">
+              <div class="px-3 py-2 bg-[#162036] border-b border-slate-700/80 flex items-center gap-2">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
+                </div>
+                <div id="sim-browser-url-box" class="flex-1 flex items-center gap-2 bg-[#080D18] border border-emerald-500/40 rounded-lg px-2.5 py-1 text-[11px] font-mono overflow-x-auto">
+                  <svg id="sim-padlock-icon" class="w-3.5 h-3.5 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span id="sim-browser-url" class="text-emerald-300 whitespace-nowrap">https://amz-festive-vouchers[.]in/claim-bonus</span>
+                </div>
+              </div>
+
+              <!-- Dynamic Victim Viewport Content -->
+              <div id="sim-victim-screen" class="p-4 space-y-3 min-h-[210px]">
+                <!-- Populated dynamically by JS -->
+              </div>
+            </div>
+
+            <!-- Why Traditional Bank-Only Investigations Hit a Dead End -->
+            <div class="rounded-xl bg-amber-500/10 border border-amber-400/35 p-3 text-xs text-amber-200/95 space-y-1">
+              <div class="font-mono text-[10px] font-bold uppercase tracking-wider text-amber-300">
+                WHY BANK-ONLY INVESTIGATIONS HIT A DEAD END:
+              </div>
+              <p id="sim-blindspot-note" class="leading-relaxed">
+                Because the victim is redirected to the real <code>amazon.in</code> payment gateway, the bank statement records a 100% genuine merchant transaction (<strong>Amazon Pay India Pvt Ltd • ₹25,000</strong>)—leaving no mule bank account on the victim's statement!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT STREAM (6 COLS): WHAT THE ATTACKER & PROXY ACTUALLY DO (HIDDEN LAYER) -->
+        <div class="lg:col-span-6 cyber-panel rounded-2xl overflow-hidden flex flex-col border-t-4 border-t-rose-500">
+          <div class="px-4 py-3 bg-[#0A101D] border-b border-rose-400/20 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse"></span>
+              <h3 class="text-sm font-bold text-white">What the Attacker &amp; Proxy Actually Do (Hidden Layer)</h3>
+            </div>
+            <span id="sim-attacker-badge" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-400/40">
+              INTERCEPTION LAYER
+            </span>
+          </div>
+
+          <div class="p-4 flex-1 flex flex-col justify-between space-y-4 tactical-grid">
+            <!-- Animated SVG Packet & Claim-Code Hijack Diagram -->
+            <div class="rounded-xl bg-[#070B14]/90 border border-slate-800 p-3">
+              <svg id="sim-attacker-svg" class="w-full h-[185px]" viewBox="0 0 560 185" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <!-- Populated dynamically per step -->
+              </svg>
+            </div>
+
+            <!-- Live Intercepted HTTP / Proxy Telemetry Terminal -->
+            <div class="rounded-xl bg-[#060911] border border-rose-500/30 p-3 font-mono text-[11px] space-y-1.5">
+              <div class="flex items-center justify-between text-[10px] text-rose-400 border-b border-slate-800 pb-1">
+                <span>HIDDEN PROXY / REDIRECT TELEMETRY STREAM</span>
+                <span id="sim-timer-chip" class="text-amber-300 font-bold">ELAPSED: T+00s</span>
+              </div>
+              <div id="sim-telemetry-log" class="text-slate-300 space-y-1 leading-relaxed">
+                <!-- Populated dynamically per step -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SYNCHRONIZED FINTRACE X EVIDENCE RECONSTRUCTION PANEL -->
+      <div class="cyber-panel rounded-2xl p-4 sm:p-5 space-y-4 border-t-4 border-t-emerald-400">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-slate-800 pb-3">
+          <div>
+            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-400/35">
+              FINTRACE X FORENSIC RECONSTRUCTION (MODULES C + E + G)
+            </span>
+            <h3 class="mt-1 text-base font-bold text-white">How FINTRACE X Bridges the Genuine-Merchant Gap</h3>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="openCase112InWorkspace()"
+              class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/40 text-sky-300 text-xs font-semibold cursor-pointer">
+              <span>Inspect CASE-RJ-2026-112 in Graph</span>
+              <span>→</span>
+            </button>
+            <button onclick="copySection94Draft()"
+              class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-300 text-xs font-semibold cursor-pointer">
+              <span>Copy Sec. 94 BNSS Requisition</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 text-xs">
+          <!-- Module C Box -->
+          <div class="cyber-card rounded-xl p-3.5 space-y-2 border-l-4 border-l-indigo-400">
+            <div class="font-mono text-[10px] font-bold text-indigo-300 uppercase">1. Module C • Redirect &amp; DNS Correlation</div>
+            <p id="sim-mod-c-text" class="text-slate-300 leading-relaxed">
+              Captures HTTP 302 redirect from <code>amz-festive-vouchers[.]in</code> (IP <code>185.220.101.44</code>) injecting <code>recipientEmail=drop.mule88@proton[.]me</code> into the genuine <code>amazon.in</code> checkout session.
+            </p>
+          </div>
+
+          <!-- Module E Box -->
+          <div class="cyber-card rounded-xl p-3.5 space-y-2 border-l-4 border-l-emerald-400">
+            <div class="font-mono text-[10px] font-bold text-emerald-300 uppercase">2. Module E • 4-Stage Gift-Card Event Chain</div>
+            <div class="grid grid-cols-2 gap-1.5 font-mono text-[10px]">
+              <div id="sim-e-stage-1" class="p-1.5 rounded bg-[#0A101D] border border-slate-700 text-slate-400">1. Purchase: ₹25,000</div>
+              <div id="sim-e-stage-2" class="p-1.5 rounded bg-[#0A101D] border border-slate-700 text-slate-400">2. Delivery: 15:10:41</div>
+              <div id="sim-e-stage-3" class="p-1.5 rounded bg-[#0A101D] border border-slate-700 text-slate-400">3. Recipient: Mule</div>
+              <div id="sim-e-stage-4" class="p-1.5 rounded bg-[#0A101D] border border-slate-700 text-slate-400">4. Redeem: 94s Wallet</div>
+            </div>
+          </div>
+
+          <!-- Module G Box -->
+          <div class="cyber-card rounded-xl p-3.5 space-y-2 border-l-4 border-l-amber-400">
+            <div class="font-mono text-[10px] font-bold text-amber-300 uppercase">3. Module G • Gap Finder &amp; Sec. 94 BNSS</div>
+            <p id="sim-mod-g-text" class="text-slate-300 leading-relaxed">
+              Flags <strong>"Legitimate Merchant Bank Entry vs. Unverified Voucher Recipient"</strong> and auto-generates a Section 94 BNSS requisition for Amazon Pay merchant logs, Wallet <code>AMZ-WLT-884920</code> KYC, and liquidation Order <code>#408-992140</code>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VIEW 3: ARCHITECTURE & CORE MODULES (A–G)
+         ====================================================================== -->
+    <section id="view-architecture" class="hidden space-y-6">
+      <div class="cyber-panel rounded-2xl p-5">
+        <span class="text-[11px] font-mono uppercase tracking-wider text-indigo-300 bg-indigo-500/15 border border-indigo-400/30 px-2.5 py-1 rounded-lg">
+          TECHNICAL ARCHITECTURE &amp; CORE MODULES (SECTIONS 3 &amp; 5)
+        </span>
+        <h2 class="mt-2 text-xl sm:text-2xl font-bold text-white">FINTRACE X Modular Cyber-Forensics Architecture</h2>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-3xl">
+          Combines cryptographic evidence integrity (SHA-256), Pandas financial normalization, NetworkX multi-hop graph intelligence, RapidFuzz cautious entity resolution, and ReportLab PDF dossier generation.
+        </p>
+
+        <!-- 4-Tier Pipeline -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-5">
+          <div class="cyber-card rounded-2xl p-4 border-t-4 border-t-sky-400">
+            <div class="text-[10px] font-mono text-sky-400 uppercase">Tier 01 • Intake &amp; Hashing</div>
+            <h3 class="text-sm font-bold text-white mt-1">Authorised Evidence Ingestion</h3>
+            <p class="text-xs text-slate-400 mt-1.5">CSV/XLSX bank statements, passive DNS/redirect captures, gift-card issuer logs, and broker extracts are hashed with SHA-256 upon upload.</p>
+          </div>
+          <div class="cyber-card rounded-2xl p-4 border-t-4 border-t-indigo-400">
+            <div class="text-[10px] font-mono text-indigo-400 uppercase">Tier 02 • Normalization</div>
+            <h3 class="text-sm font-bold text-white mt-1">Python FastAPI &amp; Pandas</h3>
+            <p class="text-xs text-slate-400 mt-1.5">Standardizes heterogeneous bank exports, aligns IST/UTC timestamps, validates UTR references, and flags velocity anomalies.</p>
+          </div>
+          <div class="cyber-card rounded-2xl p-4 border-t-4 border-t-amber-400">
+            <div class="text-[10px] font-mono text-amber-400 uppercase">Tier 03 • Graph &amp; Resolution</div>
+            <h3 class="text-sm font-bold text-white mt-1">NetworkX &amp; RapidFuzz</h3>
+            <p class="text-xs text-slate-400 mt-1.5">Reconstructs multi-hop fund flows, correlates domain/IP/redirect overlaps, and surfaces explainable cross-case leads.</p>
+          </div>
+          <div class="cyber-card rounded-2xl p-4 border-t-4 border-t-emerald-400">
+            <div class="text-[10px] font-mono text-emerald-400 uppercase">Tier 04 • Reporting</div>
+            <h3 class="text-sm font-bold text-white mt-1">Interactive UI &amp; ReportLab</h3>
+            <p class="text-xs text-slate-400 mt-1.5">Human-in-the-loop graph inspection, Gap Finder requisitions, and court-ready ReportLab PDF dossiers.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Modules A–G Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div class="cyber-card rounded-2xl p-4 space-y-2">
+          <span class="px-2.5 py-0.5 rounded bg-sky-500/15 text-sky-300 font-mono text-xs font-bold">MODULE A</span>
+          <h4 class="text-base font-bold text-white">Financial Transaction Intelligence</h4>
+          <p class="text-xs text-slate-300">CSV/XLSX statement import, Pandas validation, beneficiary relationship mapping, and unusual velocity/split detection.</p>
+        </div>
+        <div class="cyber-card rounded-2xl p-4 space-y-2">
+          <span class="px-2.5 py-0.5 rounded bg-sky-500/15 text-sky-300 font-mono text-xs font-bold">MODULE B</span>
+          <h4 class="text-base font-bold text-white">Money-Trail Graph</h4>
+          <p class="text-xs text-slate-300">Interactive NetworkX/Cytoscape-style multi-hop account and transfer visualization with chronological source inspection.</p>
+        </div>
+        <div class="cyber-card rounded-2xl p-4 space-y-2">
+          <span class="px-2.5 py-0.5 rounded bg-indigo-500/15 text-indigo-300 font-mono text-xs font-bold">MODULE C</span>
+          <h4 class="text-base font-bold text-white">Digital Infrastructure Intelligence</h4>
+          <p class="text-xs text-slate-300">Correlates decoy domains, HTTP 302 redirect parameters, DNS A-records, hosting ASNs, and nameservers across cases.</p>
+        </div>
+        <div class="cyber-card rounded-2xl p-4 space-y-2">
+          <span class="px-2.5 py-0.5 rounded bg-amber-500/15 text-amber-300 font-mono text-xs font-bold">MODULE D</span>
+          <h4 class="text-base font-bold text-white">Cross-Case Relationship Intelligence</h4>
+          <p class="text-xs text-slate-300">Exact identifier matching + cautious RapidFuzz name similarity with transparent confidence breakdowns.</p>
+        </div>
+        <div class="cyber-card rounded-2xl p-4 space-y-2">
+          <span class="px-2.5 py-0.5 rounded bg-rose-500/15 text-rose-300 font-mono text-xs font-bold">MODULE E</span>
+          <h4 class="text-base font-bold text-white">Gift-Card &amp; Digital Value Tracking</h4>
+          <p class="text-xs text-slate-300">Separates Purchase, Delivery, Recipient, and Redemption records to expose decoy-to-genuine voucher hijacking.</p>
+        </div>
+        <div class="cyber-card rounded-2xl p-4 space-y-2">
+          <span class="px-2.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 font-mono text-xs font-bold">MODULE F &amp; G</span>
+          <h4 class="text-base font-bold text-white">Securities Analysis &amp; Gap Finder</h4>
+          <p class="text-xs text-slate-300">Tracks authorised broker trades/settlements and detects missing merchant logs, timestamp drifts, and legal requisition needs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VIEW 4: SECURITY & RESPONSIBLE USE
+         ====================================================================== -->
+    <section id="view-governance" class="hidden space-y-5">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <div class="lg:col-span-7 cyber-panel rounded-2xl p-5 space-y-3 border-l-4 border-l-amber-400">
+          <span class="text-[11px] font-mono uppercase px-2.5 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-400/30">
+            SECTION 8 • SECURITY &amp; RESPONSIBLE USE CHARTER
+          </span>
+          <h2 class="text-lg font-bold text-white">Ethical Guardrails &amp; Lawful Governance</h2>
+          <ul class="text-xs sm:text-sm text-slate-300 space-y-2.5 list-disc pl-5">
+            <li><strong>Synthetic Demonstration Data:</strong> All accounts, UTRs, e-gift card claim codes, domains, and IPs in this prototype are 100% synthetic for the Rajasthan Police Cyber Security Hackathon 2026.</li>
+            <li><strong>Lawful Authorisation Required:</strong> Operational deployment strictly requires lawful authorisation (e.g., Section 94 BNSS / 91 CrPC notices) and approved institutional data access.</li>
+            <li><strong>Zero Unauthorised Access:</strong> No direct or unauthorised access to bank, e-commerce merchant, telecom, or broker systems is assumed or performed.</li>
+            <li><strong>Human Investigator Control:</strong> Every suggested correlation is an assistive lead requiring human investigator verification before action.</li>
+            <li><strong>Non-Deterministic Infrastructure Caveat:</strong> Shared IP addresses, similar names, or hosting infrastructure must never be treated as standalone proof of identity or guilt.</li>
+            <li><strong>Immutable Chain of Custody:</strong> Maintains SHA-256 source file digests and tamper-evident investigator disposition logs.</li>
+          </ul>
+        </div>
+
+        <div class="lg:col-span-5 cyber-panel rounded-2xl p-5 flex flex-col justify-between space-y-4 border-l-4 border-l-emerald-400">
+          <div class="space-y-3">
+            <span class="text-[11px] font-mono uppercase px-2.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-400/30">
+              PS05 SCOPE &amp; DISCLAIMER
+            </span>
+            <h3 class="text-lg font-bold text-white">Transforming Fragmented Evidence into Actionable Leads</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              FINTRACE X bridges the blind spots between traditional banking statements, e-commerce gift-card off-ramps, and passive digital infrastructure—accelerating cybercrime investigation workflows while keeping final analytical and legal decisions under human investigator control.
+            </p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#0A101D] border border-slate-700 text-xs text-slate-300 leading-relaxed">
+            <strong class="text-amber-300 font-mono uppercase block mb-1">Institutional Integration Note:</strong>
+            The above describes the proposed hackathon solution for Problem Statement PS05. Integrations with external institutional systems (banks, e-commerce merchants, TSPs, or depositories) are future deployment requirements and are not claimed as existing live capabilities.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       SIMULATE CSV/XLSX STATEMENT IMPORT MODAL
+       ======================================================================== -->
+  <div id="import-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 backdrop-blur-sm p-4">
+    <div class="cyber-panel rounded-2xl max-w-lg w-full p-5 sm:p-6 space-y-4 border border-sky-400/40 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="p-1.5 rounded-lg bg-sky-500/20 text-sky-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+          </span>
+          <div>
+            <h3 class="text-sm sm:text-base font-bold text-white">Simulate Authorised Evidence Statement Import</h3>
+            <p class="text-[11px] text-slate-400">Pandas Normalization + SHA-256 Chain-of-Custody Ingestion</p>
+          </div>
+        </div>
+        <button onclick="closeImportModal()" class="text-slate-400 hover:text-white p-1 cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <label class="block text-slate-300 font-semibold">Select Synthetic Evidence Extract:</label>
+        <select id="import-batch-select" class="w-full bg-[#131C31] border border-sky-400/30 rounded-xl px-3 py-2.5 text-white font-mono text-xs focus:outline-none">
+          <option value="batch_amz">AmazonPay_Sec94_Issuer_Response_112.xlsx (Wallet &amp; Liquidation Order #408-992140)</option>
+          <option value="batch_icici">ICICI_Jaipur_SubMule_Extract_084.xlsx (Sub-Mule Layering Hop • ₹2,00,000)</option>
+        </select>
+
+        <div class="bg-[#080D18] border border-slate-800 rounded-xl p-3.5 space-y-2 font-mono text-[11px]">
+          <div class="flex items-center justify-between text-slate-400" id="step-1">
+            <span>1. Computing SHA-256 source file digest...</span>
+            <span class="text-slate-500">READY</span>
+          </div>
+          <div class="flex items-center justify-between text-slate-400" id="step-2">
+            <span>2. Pandas schema validation &amp; IST normalization...</span>
+            <span class="text-slate-500">READY</span>
+          </div>
+          <div class="flex items-center justify-between text-slate-400" id="step-3">
+            <span>3. NetworkX graph merge &amp; Gap Finder update...</span>
+            <span class="text-slate-500">READY</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-2.5 pt-2">
+        <button onclick="closeImportModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold cursor-pointer">
+          Cancel
+        </button>
+        <button id="run-import-btn" onclick="executeSimulatedImport()"
+          class="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs shadow-lg shadow-sky-500/20 cursor-pointer">
+          Ingest &amp; Verify SHA-256
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none"></div>
+
+  <!-- ========================================================================
+       APPLICATION LOGIC & SYNTHETIC FORENSIC DATASETS
+       ======================================================================== -->
+  <script>
+    /* ==========================================================================
+       1. SYNTHETIC FORENSIC DATASETS (CASES 112, 084, 051)
+       ========================================================================== */
+    const CASES_DATA = {
+      'CASE-RJ-2026-112': {
+        id: 'CASE-RJ-2026-112',
+        title: 'Decoy-to-Genuine Amazon Gift Card Interception',
+        summaryText:
+          'Investigation under <strong>CASE-RJ-2026-112</strong> uncovered a Decoy-to-Genuine Gift Card Interception scheme. The victim was lured to <code>amz-festive-vouchers[.]in</code> (hosted on <code>185.220.101.44</code>) and transparently redirected to genuine <code>amazon.in</code> checkout with an attacker-controlled recipient parameter (<code>drop.mule88@proton[.]me</code>). While the victim\'s bank statement reflects a legitimate ₹25,000 payment to <code>Amazon Pay India Pvt Ltd</code>, claim code <code>GC-9941-AMZ</code> was diverted and redeemed into wallet <code>AMZ-WLT-884920</code> within 94 seconds.',
+        kpis: {
+          flow: '₹25,000',
+          flowSub: 'Paid to Genuine Amazon Pay Gateway',
+          hops: '5 Stages • 94s',
+          hopsSub: 'Checkout → Code Divert → Wallet Redeem',
+          matches: '2 Mule Clusters',
+          matchesSub: 'drop.mule88@proton[.]me & Wallet',
+          infra: 'AiTM / 302 Proxy',
+          infraSub: 'amz-festive-vouchers[.]in → 185.220.101.44',
+          gaps: '3 Actionable Flags',
+          gapsSub: 'Legit Merchant vs. Diverted Claim Code',
+        },
+        nodes: [
+          {
+            id: 'ACC-6204',
+            label: 'ACC-6204',
+            sublabel: 'Victim Bank Account (Jaipur)',
+            layer: 'financial',
+            category: 'VICTIM SOURCE ACCOUNT',
+            color: '#38BDF8',
+            x: 110,
+            y: 195,
+            pulse: false,
+            details: {
+              entityType: 'Complainant Bank Account (HDFC Jaipur)',
+              caseId: 'CASE-RJ-2026-112',
+              sourceFile: 'HDFC_Victim_Stmt_112.csv • Row #19',
+              timestamp: '2026-11-22 15:10:04 IST',
+              sha256: 'a1b2c3d4e5f60718293a4b5c6d7e8f90123456789abcdef0123456789abcdef0',
+              confidence: [
+                { label: 'UPI Ref #432910884120 Verified', score: 100, color: 'bg-emerald-400' },
+                { label: 'Browser History Redirect Match', score: 98, color: 'bg-sky-400' },
+              ],
+              summary: 'Victim authorized ₹25,000 UPI payment on genuine amazon.in after clicking festive voucher link on amz-festive-vouchers[.]in.',
+              disposition: 'VERIFIED LEAD',
+            },
+          },
+          {
+            id: 'AMZ-PAY-IN',
+            label: 'AMZ-PAY-IN',
+            sublabel: 'Genuine Amazon Merchant',
+            layer: 'financial',
+            category: 'GENUINE MERCHANT GATEWAY',
+            color: '#38BDF8',
+            x: 345,
+            y: 195,
+            pulse: false,
+            details: {
+              entityType: 'Genuine Merchant Payment Gateway (Amazon Pay India Pvt Ltd)',
+              caseId: 'CASE-RJ-2026-112',
+              sourceFile: 'HDFC_Victim_Stmt_112.csv • Row #19',
+              timestamp: '2026-11-22 15:10:04 IST',
+              sha256: 'f0e1d2c3b4a5968778695a4b3c2d1e0f9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d',
+              confidence: [
+                { label: 'Genuine Merchant VPA Verified', score: 100, color: 'bg-emerald-400' },
+                { label: 'Bank-Only Blind Spot Flag', score: 100, color: 'bg-amber-400' },
+              ],
+              summary: '100% legitimate merchant gateway. Traditional bank-only tracing stops here because the payee is Amazon Pay India, not a mule bank account.',
+              disposition: 'GAP FLAGGED',
+            },
+          },
+          {
+            id: 'DECOY-AMZ',
+            label: 'amz-festive-vouchers[.]in',
+            sublabel: 'Decoy Redirect / AiTM Proxy',
+            layer: 'infra',
+            category: 'INFRASTRUCTURE INTERCEPTOR',
+            color: '#818CF8',
+            x: 225,
+            y: 425,
+            pulse: true,
+            details: {
+              entityType: 'Decoy Lure Domain & HTTP 302 / AiTM Proxy (IP: 185.220.101.44)',
+              caseId: 'CASE-RJ-2026-112',
+              sourceFile: 'Browser_HAR_Capture_112.json • Entry #04',
+              timestamp: '2026-11-22 15:09:12 IST',
+              sha256: '5f4dcc3b5aa765d61d8327deb882cf99b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9',
+              confidence: [
+                { label: 'HTTP 302 Location Injection Verified', score: 100, color: 'bg-indigo-400' },
+                { label: 'Shared VPS IP (185.220.101.44)', score: 95, color: 'bg-rose-400' },
+              ],
+              summary: 'Lure site forwarded victim to genuine amazon.in while pre-filling recipientEmail=drop.mule88@proton[.]me (or capturing claim code via AiTM reverse proxy).',
+              disposition: 'INFRA LEAD',
+            },
+          },
+          {
+            id: 'GC-9941-AMZ',
+            label: 'GC-9941-AMZ',
+            sublabel: 'Diverted E-Gift Card (₹25k)',
+            layer: 'offramp',
+            category: 'DIVERTED DIGITAL VALUE',
+            color: '#F59E0B',
+            x: 565,
+            y: 195,
+            pulse: true,
+            details: {
+              entityType: 'Amazon E-Gift Card Voucher (Claim Code: 8X9K-M2P74Q-Z91L)',
+              caseId: 'CASE-RJ-2026-112',
+              sourceFile: 'Amazon_Sec94_OrderExtract_112.csv • Row #02',
+              timestamp: '2026-11-22 15:10:41 IST',
+              sha256: '9b71d224bd62f3785d96d46ad3ea3d73319bfbc2890caadae2dff72519673ca7',
+              confidence: [
+                { label: 'Order-to-Voucher Serial Match', score: 100, color: 'bg-emerald-400' },
+                { label: 'Recipient Diversion Confirmed', score: 99, color: 'bg-amber-400' },
+              ],
+              summary: 'Genuine ₹25,000 e-gift card issued by Amazon Pay India, but routed to attacker-controlled email instead of the victim.',
+              disposition: 'VERIFIED LEAD',
+            },
+          },
+          {
+            id: 'MULE-MAIL-112',
+            label: 'drop.mule88@proton[.]me',
+            sublabel: 'Attacker Mule Inbox',
+            layer: 'offramp',
+            category: 'ATTACKER RECIPIENT ALIAS',
+            color: '#F43F5E',
+            x: 730,
+            y: 95,
+            pulse: false,
+            details: {
+              entityType: 'Diverted Voucher Recipient Email Alias',
+              caseId: 'CASE-RJ-2026-112',
+              sourceFile: 'Amazon_Sec94_OrderExtract_112.csv • Row #02',
+              timestamp: '2026-11-22 15:10:41 IST',
+              sha256: '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1',
+              confidence: [
+                { label: 'Exact Recipient Parameter Match', score: 100, color: 'bg-rose-400' },
+                { label: 'Cross-Case Alias Recurrence (3x)', score: 96, color: 'bg-amber-400' },
+              ],
+              summary: 'Encrypted drop inbox injected into the checkout flow; received the unredeemed ₹25,000 Amazon claim code.',
+              disposition: 'VERIFIED LEAD',
+            },
+          },
+          {
+            id: 'AMZ-WLT-884920',
+            label: 'AMZ-WLT-884920',
+            sublabel: 'Attacker Redemption Wallet',
+            layer: 'offramp',
+            category: 'WALLET REDEMPTION (94s)',
+            color: '#10B981',
+            x: 845,
+            y: 250,
+            pulse: true,
+            details: {
+              entityType: 'Attacker-Controlled Amazon Pay Gift Wallet',
+              caseId: 'CASE-RJ-2026-112',
+              sourceFile: 'Amazon_Sec94_Redemption_112.csv • Row #05',
+              timestamp: '2026-11-22 15:12:15 IST (94s)',
+              sha256: '7c4a8d09ca3762af61e59520943dc26494f8941b4b5c6d7e8f9a0b1c2d3e4f5a',
+              confidence: [
+                { label: 'Claim Code Redemption Match', score: 100, color: 'bg-emerald-400' },
+                { label: '94-Second Automated Sweep', score: 97, color: 'bg-rose-400' },
+              ],
+              summary: 'Claim code 8X9K-M2P74Q-Z91L redeemed into wallet AMZ-WLT-884920 just 94 seconds after victim payment.',
+              disposition: 'NOTICE DRAFTED',
+            },
+          },
+          {
+            id: 'LIQ-ORDER-408',
+            label: 'Order #408-992140',
+            sublabel: 'Electronics Liquidation',
+            layer: 'offramp',
+            category: 'GOODS CASH-OUT',
+            color: '#F43F5E',
+            x: 845,
+            y: 430,
+            pulse: false,
+            details: {
+              entityType: 'High-Value Electronics Liquidation Order',
+              caseId: 'CASE-RJ-2026-112',
+              sourceFile: 'Amazon_Sec94_Redemption_112.csv • Row #08',
+              timestamp: '2026-11-22 15:19:44 IST',
+              sha256: 'd8578edf8458ce06fbc5bb76a58c5ca4e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6',
+              confidence: [
+                { label: 'Wallet Balance Debited (₹24,999)', score: 100, color: 'bg-emerald-400' },
+                { label: 'Drop Shipping Address Lead', score: 90, color: 'bg-amber-400' },
+              ],
+              summary: 'Wallet balance immediately spent on an unlocked smartphone shipped to a drop pickup hub for cash resale.',
+              disposition: 'NOTICE DRAFTED',
+            },
+          },
+        ],
+        edges: [
+          {
+            id: 'E112-1',
+            from: 'ACC-6204',
+            to: 'AMZ-PAY-IN',
+            label: '₹25,000 • UPI #432910884120',
+            layer: 'financial',
+            color: '#38BDF8',
+            marker: 'arrow-cyan',
+            animated: true,
+            dashed: false,
+            details: {
+              entityType: 'Genuine Merchant UPI Payment',
+              caseId: 'CASE-RJ-2026-112',
+              sourceFile: 'HDFC_Victim_Stmt_112.csv • Row #19',
+              timestamp: '2026-11-22 15:10:04 IST',
+              sha256: 'a1b2c3d4e5f60718293a4b5c6d7e8f90123456789abcdef0123456789abcdef0',
+              confidence: [{ label: 'NPCI UPI Ref Verified', score: 100, color: 'bg-emerald-400' }],
+              summary: 'Victim paid ₹25,000 directly to Amazon Pay India Pvt Ltd.',
+              disposition: 'VERIFIED LEAD',
+            },
+          },
+          {
+            id: 'E112-2',
+            from: 'DECOY-AMZ',
+            to: 'ACC-6204',
+            label: 'Lure Link Click',
+            layer: 'infra',
+            color: '#818CF8',
+            marker: 'arrow-indigo',
+            animated: false,
+            dashed: true,
+            details: {
+              entityType: 'Phishing / Decoy Lure Vector',
+              caseId: 'CASE-RJ-2026-112',
+              sourceFile: 'Browser_HAR_Capture_112.json • Entry #01',
+              timestamp: '2026-11-22 15:09:12 IST',
+              sha256: '5f4dcc3b5aa765d61d8327deb882cf99b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9',
+              confidence: [{ label: 'Browser History Verified', score: 98, color: 'bg-indigo-400' }],
+              summary: 'Victim clicked festive gift-card offer on decoy site.',
+              disposition: 'INFRA LEAD',
+            },
+          },
+          {
+            id: 'E112-3',
+            from: 'DECOY-AMZ',
+            to: 'AMZ-PAY-IN',
+            label: '302 Redirect / AiTM Proxy',
+            layer: 'infra',
+            color: '#818CF8',
+            marker: 'arrow-indigo',
+            animated: true,
+            dashed: true,
+            details: {
+              entityType: 'Transparent Redirect / AiTM Session Relay',
+              caseId: 'CASE-RJ-2026-112',
+              sourceFile: 'Browser_HAR_Capture_112.json • Entry #04',
+              timestamp: '2026-11-22 15:09:14 IST',
+              sha256: '5f4dcc3b5aa765d61d8327deb882cf99b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9',
+              confidence: [{ label: 'HTTP 302 Location Header Captured', score: 100, color: 'bg-indigo-400' }],
+              summary: 'Redirects victim to genuine amazon.in while injecting attacker recipient email.',
+              disposition: 'INFRA LEAD',
+            },
+          },
+          {
+            id: 'E112-4',
+            from: 'AMZ-PAY-IN',
+            to: 'GC-9941-AMZ',
+            label: 'Issues E-Voucher GC-9941-AMZ',
+            layer: 'offramp',
+            color: '#F59E0B',
+            marker: 'arrow-amber',
+            animated: true,
+            dashed: false,
+            details: {
+              entityType: 'E-Gift Card Issuance Event (Module E)',
+              caseId: 'CASE-RJ-2026-112',
+              sourceFile: 'Amazon_Sec94_OrderExtract_112.csv • Row #02',
+              timestamp: '2026-11-22 15:10:41 IST',
+              sha256: '9b71d224bd62f3785d96d46ad3ea3d73319bfbc2890caadae2dff72519673ca7',
+              confidence: [{ label: 'Merchant Order Serial Verified', score: 100, color: 'bg-emerald-400' }],
+              summary: 'Amazon system generated ₹25,000 e-gift card voucher upon UPI confirmation.',
+              disposition: 'VERIFIED LEAD',
+            },
+          },
+          {
+            id: 'E112-5',
+            from: 'GC-9941-AMZ',
+            to: 'MULE-MAIL-112',
+            label: 'Diverted Delivery (Email)',
+            layer: 'offramp',
+            color: '#F43F5E',
+            marker: 'arrow-crimson',
+            animated: true,
+            dashed: false,
+            details: {
+              entityType: 'Recipient Parameter Hijack (Module E)',
+              caseId: 'CASE-RJ-2026-112',
+              sourceFile: 'Amazon_Sec94_OrderExtract_112.csv • Row #02',
+              timestamp: '2026-11-22 15:10:41 IST',
+              sha256: '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1',
+              confidence: [{ label: 'Recipient Email Mismatch Confirmed', score: 100, color: 'bg-rose-400' }],
+              summary: 'Claim code delivered to drop.mule88@proton[.]me instead of complainant.',
+              disposition: 'VERIFIED LEAD',
+            },
+          },
+          {
+            id: 'E112-6',
+            from: 'MULE-MAIL-112',
+            to: 'AMZ-WLT-884920',
+            label: 'Redeemed in 94s',
+            layer: 'offramp',
+            color: '#10B981',
+            marker: 'arrow-emerald',
+            animated: true,
+            dashed: false,
+            details: {
+              entityType: 'Claim Code Redemption Event (Module E)',
+              caseId: 'CASE-RJ-2026-112',
+              sourceFile: 'Amazon_Sec94_Redemption_112.csv • Row #05',
+              timestamp: '2026-11-22 15:12:15 IST',
+              sha256: '7c4a8d09ca3762af61e59520943dc26494f8941b4b5c6d7e8f9a0b1c2d3e4f5a',
+              confidence: [{ label: '94s Automated Redemption Log', score: 100, color: 'bg-emerald-400' }],
+              summary: 'Claim code redeemed into wallet AMZ-WLT-884920 94 seconds post-checkout.',
+              disposition: 'NOTICE DRAFTED',
+            },
+          },
+          {
+            id: 'E112-7',
+            from: 'AMZ-WLT-884920',
+            to: 'LIQ-ORDER-408',
+            label: '₹24,999 Smartphone Order',
+            layer: 'offramp',
+            color: '#F43F5E',
+            marker: 'arrow-crimson',
+            animated: false,
+            dashed: false,
+            details: {
+              entityType: 'Physical Goods Liquidation',
+              caseId: 'CASE-RJ-2026-112',
+              sourceFile: 'Amazon_Sec94_Redemption_112.csv • Row #08',
+              timestamp: '2026-11-22 15:19:44 IST',
+              sha256: 'd8578edf8458ce06fbc5bb76a58c5ca4e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6',
+              confidence: [{ label: 'Order Fulfillment Record', score: 100, color: 'bg-emerald-400' }],
+              summary: 'Gift wallet converted into high-resale electronics.',
+              disposition: 'NOTICE DRAFTED',
+            },
+          },
+        ],
+        ledger: [
+          {
+            hop: 'Stage 1',
+            timestamp: '2026-11-22 15:10:04',
+            source: 'ACC-6204 (Victim - HDFC Jaipur)',
+            beneficiary: 'Amazon Pay India Pvt Ltd (Genuine)',
+            amount: '₹25,000',
+            mode: 'UPI • #432910884120',
+            status: 'VALIDATED',
+            sourceRef: 'HDFC_Victim_112.csv : R19',
+            sha256: 'a1b2c3d4e5f60718293a4b5c6d7e8f90',
+            nodeId: 'AMZ-PAY-IN',
+          },
+          {
+            hop: 'Stage 2',
+            timestamp: '2026-11-22 15:10:41',
+            source: 'AMZ-PAY-IN (Order #408-119204)',
+            beneficiary: 'GC-9941-AMZ (8X9K-M2P74Q-Z91L)',
+            amount: '₹25,000',
+            mode: 'E-VOUCHER • Issued',
+            status: 'FLAGGED',
+            sourceRef: 'Amazon_Sec94_112.csv : R02',
+            sha256: '9b71d224bd62f3785d96d46ad3ea3d73',
+            nodeId: 'GC-9941-AMZ',
+          },
+          {
+            hop: 'Stage 3',
+            timestamp: '2026-11-22 15:10:41',
+            source: 'GC-9941-AMZ (Diverted Recipient)',
+            beneficiary: 'drop.mule88@proton[.]me',
+            amount: '₹25,000',
+            mode: 'EMAIL • 302 Param Inject',
+            status: 'FLAGGED',
+            sourceRef: 'Browser_HAR_112.json : E04',
+            sha256: '3c9909afec25354d551dae21590bb26e',
+            nodeId: 'MULE-MAIL-112',
+          },
+          {
+            hop: 'Stage 4',
+            timestamp: '2026-11-22 15:12:15',
+            source: 'drop.mule88@proton[.]me',
+            beneficiary: 'AMZ-WLT-884920 (Redemption)',
+            amount: '₹25,000',
+            mode: 'WALLET • 94s Sweep',
+            status: 'OFFRAMP',
+            sourceRef: 'Amazon_Sec94_112.csv : R05',
+            sha256: '7c4a8d09ca3762af61e59520943dc264',
+            nodeId: 'AMZ-WLT-884920',
+          },
+          {
+            hop: 'Stage 5',
+            timestamp: '2026-11-22 15:19:44',
+            source: 'AMZ-WLT-884920',
+            beneficiary: 'Order #408-992140 (Electronics)',
+            amount: '₹24,999',
+            mode: 'GOODS • Liquidation',
+            status: 'OFFRAMP',
+            sourceRef: 'Amazon_Sec94_112.csv : R08',
+            sha256: 'd8578edf8458ce06fbc5bb76a58c5ca4',
+            nodeId: 'LIQ-ORDER-408',
+          },
+        ],
+      },
+
+      'CASE-RJ-2026-084': {
+        id: 'CASE-RJ-2026-084',
+        title: 'Multi-Hop Mule Fan-Out & Crypto/Brokerage Off-Ramp',
+        summaryText:
+          'Analysis of banking, brokerage, e-voucher, and passive DNS records under <strong>CASE-RJ-2026-084</strong> reconstructed a 4-hop fund-layering chain originating from Complainant Account <code>ACC-9901</code> (₹18,50,000) into intermediary mule hub <code>ACC-4410 (M/S Apex Digital Traders)</code>, followed by rapid fan-out across <code>ACC-7721</code> (Corporate Gift-Card off-ramp), <code>ACC-7728</code> (Brokerage off-ramp), and <code>ACC-7734</code> (Cross-case overlap with <code>CASE-RJ-2026-051</code>).',
+        kpis: {
+          flow: '₹48,75,000',
+          flowSub: 'Across 7 verified bank & off-ramp records',
+          hops: '4 Hops',
+          hopsSub: 'Source → Mule Hub → Layer → Off-Ramp',
+          matches: '3 Explainable Leads',
+          matchesSub: 'RapidFuzz + Exact SHA-256 Phone/IMEI',
+          infra: '2 Shared IPs/NS',
+          infraSub: '185.220.101.44 & cloud-shield-dns',
+          gaps: '4 Actionable Flags',
+          gapsSub: 'Missing redemption log & 14m drift',
+        },
+        nodes: [
+          {
+            id: 'ACC-9901',
+            label: 'ACC-9901',
+            sublabel: 'Complainant Savings (Jaipur)',
+            layer: 'financial',
+            category: 'SOURCE ACCOUNT',
+            color: '#38BDF8',
+            x: 110,
+            y: 230,
+            pulse: false,
+            details: {
+              entityType: 'Complainant Bank Account (SBI Jaipur Main)',
+              caseId: 'CASE-RJ-2026-084',
+              sourceFile: 'SBI_Jaipur_Complainant_084.csv • Row #14',
+              timestamp: '2026-11-20 13:45:10 IST',
+              sha256: '8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4',
+              confidence: [{ label: 'Verified Bank KYC & FIR Extract', score: 100, color: 'bg-emerald-400' }],
+              summary: 'Victim savings account debited via unauthorized RTGS after interacting with phishing domain rbi-kyc-verify[.]in.',
+              disposition: 'VERIFIED LEAD',
+            },
+          },
+          {
+            id: 'ACC-4410',
+            label: 'ACC-4410',
+            sublabel: 'M/S Apex Digital Traders',
+            layer: 'financial',
+            category: 'HIGH-RISK MULE HUB',
+            color: '#F43F5E',
+            x: 340,
+            y: 230,
+            pulse: true,
+            details: {
+              entityType: 'Intermediary Current Account (Mule Aggregator)',
+              caseId: 'CASE-RJ-2026-084',
+              sourceFile: 'HDFC_MuleHub_Stmt_084.xlsx • Row #42',
+              timestamp: '2026-11-20 13:48:22 IST',
+              sha256: '2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae',
+              confidence: [{ label: 'Rapid Fan-Out Velocity (3 splits < 27m)', score: 98, color: 'bg-rose-400' }],
+              summary: 'Received ₹18,50,000 from ACC-9901 and immediately split ₹16,50,000 across three downstream layering accounts.',
+              disposition: 'HIGH-RISK MULE HUB',
+            },
+          },
+          {
+            id: 'ACC-7721',
+            label: 'ACC-7721',
+            sublabel: 'R. Sharma (Layer 2)',
+            layer: 'financial',
+            category: 'DOWNSTREAM ACCOUNT',
+            color: '#38BDF8',
+            x: 575,
+            y: 95,
+            pulse: false,
+            details: {
+              entityType: 'Downstream Beneficiary Account (ICICI Jaipur)',
+              caseId: 'CASE-RJ-2026-084',
+              sourceFile: 'HDFC_MuleHub_Stmt_084.xlsx • Row #45',
+              timestamp: '2026-11-20 14:04:11 IST',
+              sha256: '4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a',
+              confidence: [{ label: 'NEFT #UTR883104 Match', score: 100, color: 'bg-emerald-400' }],
+              summary: 'Received ₹4,20,000 from Mule Hub ACC-4410 and purchased ₹3,00,000 in e-gift vouchers.',
+              disposition: 'VERIFIED LEAD',
+            },
+          },
+          {
+            id: 'GC-CHAIN',
+            label: 'Gift-Card Chain',
+            sublabel: '₹3,00,000 • Redemption MISSING',
+            layer: 'offramp',
+            category: 'E-VOUCHER OFF-RAMP',
+            color: '#F59E0B',
+            x: 825,
+            y: 95,
+            pulse: true,
+            details: {
+              entityType: 'Digital Value Event Chain (Module E)',
+              caseId: 'CASE-RJ-2026-084',
+              sourceFile: 'Gateway_EVoucher_Log_084.csv • Row #118',
+              timestamp: '2026-11-20 14:28:19 IST',
+              sha256: 'ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d',
+              confidence: [{ label: 'Redemption Log Completeness', score: 25, color: 'bg-amber-400' }],
+              summary: 'Purchase and delivery verified; merchant redemption log is MISSING (Flagged in Gap Finder).',
+              disposition: 'GAP FLAGGED',
+            },
+          },
+          {
+            id: 'ACC-7728',
+            label: 'ACC-7728',
+            sublabel: 'K. Verma (Layer 2)',
+            layer: 'financial',
+            category: 'DOWNSTREAM ACCOUNT',
+            color: '#38BDF8',
+            x: 575,
+            y: 230,
+            pulse: false,
+            details: {
+              entityType: 'Downstream Beneficiary Account (Axis Bank)',
+              caseId: 'CASE-RJ-2026-084',
+              sourceFile: 'HDFC_MuleHub_Stmt_084.xlsx • Row #47',
+              timestamp: '2026-11-20 14:12:08 IST',
+              sha256: '7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451',
+              confidence: [{ label: 'RTGS #UTR883219 Verified', score: 100, color: 'bg-emerald-400' }],
+              summary: 'Transferred ₹6,50,000 to AlphaTrade Securities client pool.',
+              disposition: 'VERIFIED LEAD',
+            },
+          },
+          {
+            id: 'SEC-CHAIN',
+            label: 'Brokerage Chain',
+            sublabel: 'Trade #TR-904 • Hold Active',
+            layer: 'offramp',
+            category: 'SECURITIES OFF-RAMP',
+            color: '#10B981',
+            x: 825,
+            y: 230,
+            pulse: false,
+            details: {
+              entityType: 'Securities & Broker Event Chain (Module F)',
+              caseId: 'CASE-RJ-2026-084',
+              sourceFile: 'AlphaTrade_Ledger_084.xlsx • Row #19',
+              timestamp: '2026-11-20 13:58:02 IST (14m Drift)',
+              sha256: '2c624232cdd221771294dfbb310aca000a0df6ac8b66b696d90ef06fdefb64a3',
+              confidence: [{ label: 'Authorised Broker Extract Match', score: 100, color: 'bg-emerald-400' }],
+              summary: 'Settlement payout frozen; 14-minute clock drift flagged for verification.',
+              disposition: 'NOTICE DRAFTED',
+            },
+          },
+          {
+            id: 'ACC-7734',
+            label: 'ACC-7734',
+            sublabel: 'S. Meena (Layer 2)',
+            layer: 'financial',
+            category: 'DOWNSTREAM ACCOUNT',
+            color: '#38BDF8',
+            x: 575,
+            y: 365,
+            pulse: false,
+            details: {
+              entityType: 'Downstream Beneficiary Account (PNB Kota)',
+              caseId: 'CASE-RJ-2026-084',
+              sourceFile: 'HDFC_MuleHub_Stmt_084.xlsx • Row #49',
+              timestamp: '2026-11-20 14:15:40 IST',
+              sha256: '19581e27de7ced00ff1ce50b2047e7a567c76b1cbaebabe5ef03f7c3017bb5b7',
+              confidence: [{ label: 'Cross-Case Phone Hash Match', score: 100, color: 'bg-amber-400' }],
+              summary: 'Shares exact mobile SHA-256 hash and 91.4% RapidFuzz name match with ACC-3109 in CASE-RJ-2026-051.',
+              disposition: 'VERIFIED LEAD',
+            },
+          },
+          {
+            id: 'CASE-051-NODE',
+            label: 'CASE-RJ-2026-051',
+            sublabel: 'ACC-3109 • Suresh Meena',
+            layer: 'financial',
+            category: 'CROSS-CASE LINK',
+            color: '#F59E0B',
+            x: 825,
+            y: 365,
+            pulse: true,
+            details: {
+              entityType: 'Cross-Case Linked Beneficiary Entity (Module D)',
+              caseId: 'CASE-RJ-2026-051',
+              sourceFile: 'PNB_Kota_Case051_Extract.csv • Row #08',
+              timestamp: '2026-11-18 17:22:05 IST',
+              sha256: '4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce',
+              confidence: [{ label: 'RapidFuzz Name Similarity', score: 91.4, color: 'bg-amber-400' }],
+              summary: 'Repeat beneficiary identified across separate cyber-fraud FIR.',
+              disposition: 'VERIFIED LEAD',
+            },
+          },
+          {
+            id: 'DOM-084',
+            label: 'rbi-kyc-verify[.]in',
+            sublabel: 'Phishing Lure Domain',
+            layer: 'infra',
+            category: 'DIGITAL INFRASTRUCTURE',
+            color: '#818CF8',
+            x: 150,
+            y: 465,
+            pulse: false,
+            details: {
+              entityType: 'Observed Phishing Domain (Module C)',
+              caseId: 'CASE-RJ-2026-084',
+              sourceFile: 'OSINT_PassiveDNS_084.json • Entry #01',
+              timestamp: '2026-11-20 11:10:00 IST',
+              sha256: '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',
+              confidence: [{ label: 'SMS Lure URL Correlation', score: 98, color: 'bg-indigo-400' }],
+              summary: 'Resolves to shared hosting IP 185.220.101.44.',
+              disposition: 'INFRA LEAD',
+            },
+          },
+          {
+            id: 'IP-084',
+            label: '185.220.101.44',
+            sublabel: 'DNS A • ns1.cloud-shield-dns',
+            layer: 'infra',
+            category: 'SHARED IP / NS OVERLAP',
+            color: '#818CF8',
+            x: 470,
+            y: 485,
+            pulse: false,
+            details: {
+              entityType: 'Hosting IPv4 & Nameserver (Module C)',
+              caseId: 'CASE-RJ-2026-084 ↔ 051 ↔ 112',
+              sourceFile: 'OSINT_PassiveDNS_084.json • Entry #02',
+              timestamp: '2026-11-20 11:12:30 IST',
+              sha256: 'd4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35',
+              confidence: [{ label: 'Exact DNS A & NS Overlap', score: 100, color: 'bg-indigo-400' }],
+              summary: 'Shared across Case 084, Case 051, and Case 112 decoy proxy.',
+              disposition: 'INFRA LEAD',
+            },
+          },
+        ],
+        edges: [
+          { id: 'E-01', from: 'ACC-9901', to: 'ACC-4410', label: '₹18,50,000 • UTR882910', layer: 'financial', color: '#38BDF8', marker: 'arrow-cyan', animated: true, dashed: false, details: { entityType: 'Hop 1 Transfer', caseId: 'CASE-RJ-2026-084', sourceFile: 'SBI_Jaipur_084.csv • R14', timestamp: '2026-11-20 13:45:10 IST', sha256: '9f86d081884c7d659a2feaa0c55ad015', confidence: [{ label: 'UTR Verified', score: 100, color: 'bg-emerald-400' }], summary: 'Primary outflow to Mule Hub.', disposition: 'VERIFIED LEAD' } },
+          { id: 'E-02', from: 'ACC-4410', to: 'ACC-7721', label: '₹4,20,000 • NEFT', layer: 'financial', color: '#F43F5E', marker: 'arrow-crimson', animated: true, dashed: false, details: { entityType: 'Hop 2 Split', caseId: 'CASE-RJ-2026-084', sourceFile: 'HDFC_MuleHub_084.xlsx • R45', timestamp: '2026-11-20 14:04:11 IST', sha256: '4b227777d4dd1fc61c6f884f48641d02', confidence: [{ label: 'NEFT Verified', score: 100, color: 'bg-emerald-400' }], summary: 'Split tranche to R. Sharma.', disposition: 'VERIFIED LEAD' } },
+          { id: 'E-03', from: 'ACC-4410', to: 'ACC-7728', label: '₹6,50,000 • RTGS', layer: 'financial', color: '#F43F5E', marker: 'arrow-crimson', animated: true, dashed: false, details: { entityType: 'Hop 2 Split', caseId: 'CASE-RJ-2026-084', sourceFile: 'HDFC_MuleHub_084.xlsx • R47', timestamp: '2026-11-20 14:12:08 IST', sha256: '7902699be42c8a8e46fbbb4501726517', confidence: [{ label: 'RTGS Verified', score: 100, color: 'bg-emerald-400' }], summary: 'Split tranche to K. Verma.', disposition: 'VERIFIED LEAD' } },
+          { id: 'E-04', from: 'ACC-4410', to: 'ACC-7734', label: '₹5,80,000 • IMPS', layer: 'financial', color: '#F43F5E', marker: 'arrow-crimson', animated: true, dashed: false, details: { entityType: 'Hop 2 Split', caseId: 'CASE-RJ-2026-084', sourceFile: 'HDFC_MuleHub_084.xlsx • R49', timestamp: '2026-11-20 14:15:40 IST', sha256: '19581e27de7ced00ff1ce50b2047e7a5', confidence: [{ label: 'IMPS Verified', score: 100, color: 'bg-emerald-400' }], summary: 'Split tranche to S. Meena.', disposition: 'VERIFIED LEAD' } },
+          { id: 'E-05', from: 'ACC-7721', to: 'GC-CHAIN', label: '₹3,00,000 E-Vouchers', layer: 'offramp', color: '#F59E0B', marker: 'arrow-amber', animated: false, dashed: false, details: { entityType: 'Gift-Card Conversion', caseId: 'CASE-RJ-2026-084', sourceFile: 'Gateway_EVoucher_084.csv • R118', timestamp: '2026-11-20 14:28:19 IST', sha256: 'ef2d127de37b942baad06145e54b0c61', confidence: [{ label: 'Order Verified', score: 100, color: 'bg-emerald-400' }], summary: 'Bulk e-voucher purchase.', disposition: 'GAP FLAGGED' } },
+          { id: 'E-06', from: 'ACC-7728', to: 'SEC-CHAIN', label: '₹6,50,000 Broker Deposit', layer: 'offramp', color: '#10B981', marker: 'arrow-emerald', animated: false, dashed: false, details: { entityType: 'Brokerage Deposit', caseId: 'CASE-RJ-2026-084', sourceFile: 'AlphaTrade_084.xlsx • R19', timestamp: '2026-11-20 13:58:02 IST', sha256: '2c624232cdd221771294dfbb310aca00', confidence: [{ label: 'Ledger Verified', score: 100, color: 'bg-emerald-400' }], summary: 'Brokerage escrow credit.', disposition: 'NOTICE DRAFTED' } },
+          { id: 'E-07', from: 'ACC-7734', to: 'CASE-051-NODE', label: 'RapidFuzz 91.4% + Phone Hash', layer: 'financial', color: '#F59E0B', marker: 'arrow-amber', animated: true, dashed: true, details: { entityType: 'Cross-Case Match', caseId: 'CASE-RJ-2026-084 ↔ 051', sourceFile: 'CrossCase_Engine.json', timestamp: '2026-11-24 21:50:00 IST', sha256: '4e07408562bedb8b60ce05c1decfe3ad', confidence: [{ label: 'Hybrid Score', score: 94.6, color: 'bg-amber-400' }], summary: 'Links S. Meena to Suresh Meena.', disposition: 'VERIFIED LEAD' } },
+          { id: 'E-08', from: 'DOM-084', to: 'ACC-9901', label: 'Phishing Lure Target', layer: 'infra', color: '#818CF8', marker: 'arrow-indigo', animated: false, dashed: true, details: { entityType: 'Phishing Vector', caseId: 'CASE-RJ-2026-084', sourceFile: 'SMS_Artifact_084.txt', timestamp: '2026-11-20 13:31:04 IST', sha256: '6b86b273ff34fce19d6b804eff5a3f57', confidence: [{ label: 'SMS Link Match', score: 98, color: 'bg-indigo-400' }], summary: 'SMS phishing lure.', disposition: 'INFRA LEAD' } },
+          { id: 'E-09', from: 'DOM-084', to: 'IP-084', label: 'DNS A / NS Record', layer: 'infra', color: '#818CF8', marker: 'arrow-indigo', animated: false, dashed: false, details: { entityType: 'DNS Resolution', caseId: 'CASE-RJ-2026-084', sourceFile: 'PassiveDNS_084.json', timestamp: '2026-11-20 11:12:30 IST', sha256: 'd4735e3a265e16eee03f59718b9b5d03', confidence: [{ label: 'Passive DNS', score: 100, color: 'bg-indigo-400' }], summary: 'Resolves to 185.220.101.44.', disposition: 'INFRA LEAD' } },
+          { id: 'E-10', from: 'IP-084', to: 'CASE-051-NODE', label: 'Shared Hosting IP / NS Overlap', layer: 'infra', color: '#818CF8', marker: 'arrow-indigo', animated: true, dashed: true, details: { entityType: 'Infra Overlap', caseId: 'CASE-RJ-2026-084 ↔ 051', sourceFile: 'PassiveDNS_CrossCheck.json', timestamp: '2026-11-24 21:52:10 IST', sha256: '3b64db95cb55c763391c707108489ae1', confidence: [{ label: 'Infra Lead', score: 82, color: 'bg-indigo-400' }], summary: 'Shared VPS IP across cases.', disposition: 'INFRA LEAD' } },
+        ],
+        ledger: [
+          { hop: 'Hop 1', timestamp: '2026-11-20 13:45:10', source: 'ACC-9901 (Complainant - SBI)', beneficiary: 'ACC-4410 (M/S Apex Digital Traders)', amount: '₹18,50,000', mode: 'RTGS • #UTR882910', status: 'VALIDATED', sourceRef: 'SBI_Jaipur_084.csv : R14', sha256: '8f434346648f6b96df89dda901c5176b', nodeId: 'ACC-4410' },
+          { hop: 'Hop 2A', timestamp: '2026-11-20 14:04:11', source: 'ACC-4410 (M/S Apex Digital)', beneficiary: 'ACC-7721 (R. Sharma - ICICI)', amount: '₹4,20,000', mode: 'NEFT • #UTR883104', status: 'FLAGGED', sourceRef: 'HDFC_MuleHub_084.xlsx : R45', sha256: '4b227777d4dd1fc61c6f884f48641d02', nodeId: 'ACC-7721' },
+          { hop: 'Hop 2B', timestamp: '2026-11-20 14:12:08', source: 'ACC-4410 (M/S Apex Digital)', beneficiary: 'ACC-7728 (K. Verma - Axis)', amount: '₹6,50,000', mode: 'RTGS • #UTR883219', status: 'FLAGGED', sourceRef: 'HDFC_MuleHub_084.xlsx : R47', sha256: '7902699be42c8a8e46fbbb4501726517', nodeId: 'ACC-7728' },
+          { hop: 'Hop 2C', timestamp: '2026-11-20 14:15:40', source: 'ACC-4410 (M/S Apex Digital)', beneficiary: 'ACC-7734 (S. Meena - PNB)', amount: '₹5,80,000', mode: 'IMPS • #UTR883402', status: 'FLAGGED', sourceRef: 'HDFC_MuleHub_084.xlsx : R49', sha256: '19581e27de7ced00ff1ce50b2047e7a5', nodeId: 'ACC-7734' },
+          { hop: 'Hop 3A', timestamp: '2026-11-20 14:28:19', source: 'ACC-7721 (R. Sharma)', beneficiary: 'E-Voucher Merchant (#GC-99210)', amount: '₹3,00,000', mode: 'PG/UPI • 30 Vouchers', status: 'OFFRAMP', sourceRef: 'Gateway_EVoucher_084.csv : R118', sha256: 'ef2d127de37b942baad06145e54b0c61', nodeId: 'GC-CHAIN' },
+          { hop: 'Hop 3B', timestamp: '2026-11-20 13:58:02*', source: 'ACC-7728 (K. Verma)', beneficiary: 'AlphaTrade Client Pool (AT-88412)', amount: '₹6,50,000', mode: 'BROKER • Trade #TR-904', status: 'OFFRAMP', sourceRef: 'AlphaTrade_084.xlsx : R19', sha256: '2c624232cdd221771294dfbb310aca00', nodeId: 'SEC-CHAIN' },
+        ],
+      },
+
+      'CASE-RJ-2026-051': {
+        id: 'CASE-RJ-2026-051',
+        title: 'Cross-Case Beneficiary & Phishing Infra Overlap',
+        summaryText:
+          'Investigation under <strong>CASE-RJ-2026-051</strong> linked Udaipur complainant account <code>ACC-5101</code> (₹12,90,000) to repeat mule collector <code>ACC-3109 (Suresh Meena)</code>, which shares an exact salted mobile SHA-256 hash and 91.4% RapidFuzz name score with <code>ACC-7734</code> in <code>CASE-RJ-2026-084</code>, as well as hosting IP <code>185.220.101.44</code>.',
+        kpis: {
+          flow: '₹31,40,000',
+          flowSub: 'Linked phishing campaign proceeds',
+          hops: '3 Hops',
+          hopsSub: 'Victim → Collector → Repeat Mule',
+          matches: '2 Cross-Case Links',
+          matchesSub: 'Linked directly to CASE-RJ-2026-084',
+          infra: '2 Shared IPs/NS',
+          infraSub: 'rbi-card-update[.]in → 185.220.101.44',
+          gaps: '2 Actionable Flags',
+          gapsSub: 'VPS subscriber logs & ATM CCTV frame',
+        },
+        nodes: [
+          { id: 'ACC-5101', label: 'ACC-5101', sublabel: 'Complainant B (Udaipur)', layer: 'financial', category: 'SOURCE ACCOUNT', color: '#38BDF8', x: 150, y: 220, pulse: false, details: { entityType: 'Complainant Bank Account (BOB Udaipur)', caseId: 'CASE-RJ-2026-051', sourceFile: 'BOB_Udaipur_051.csv • Row #09', timestamp: '2026-11-18 16:40:12 IST', sha256: 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', confidence: [{ label: 'FIR & Bank Statement Verified', score: 100, color: 'bg-emerald-400' }], summary: 'Victim account compromised via fake card-update portal rbi-card-update[.]in.', disposition: 'VERIFIED LEAD' } },
+          { id: 'ACC-3109', label: 'ACC-3109', sublabel: 'Suresh Meena (Repeat Mule)', layer: 'financial', category: 'REPEAT BENEFICIARY HUB', color: '#F43F5E', x: 470, y: 220, pulse: true, details: { entityType: 'Repeat Beneficiary Account (PNB Kota)', caseId: 'CASE-RJ-2026-051', sourceFile: 'PNB_Kota_Case051_Extract.csv • Row #08', timestamp: '2026-11-18 17:22:05 IST', sha256: '4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce', confidence: [{ label: 'Exact Mobile SHA-256 Match w/ Case 084', score: 100, color: 'bg-emerald-400' }], summary: 'Primary mule collector in Case 051; cross-matched with downstream beneficiary ACC-7734 in Case 084.', disposition: 'HIGH-RISK MULE HUB' } },
+          { id: 'CASE-084-BACKLINK', label: 'CASE-RJ-2026-084', sublabel: 'ACC-7734 • S. Meena', layer: 'financial', category: 'CROSS-CASE LINK', color: '#F59E0B', x: 800, y: 220, pulse: true, details: { entityType: 'Linked Case Investigation Node (Module D)', caseId: 'CASE-RJ-2026-084', sourceFile: 'HDFC_MuleHub_Stmt_084.xlsx • Row #49', timestamp: '2026-11-20 14:15:40 IST', sha256: '19581e27de7ced00ff1ce50b2047e7a567c76b1cbaebabe5ef03f7c3017bb5b7', confidence: [{ label: 'Cross-Case Beneficiary Correlation', score: 94.6, color: 'bg-amber-400' }], summary: 'Linked via salted phone SHA-256 and RapidFuzz name similarity.', disposition: 'VERIFIED LEAD' } },
+          { id: 'DOM-051', label: 'rbi-card-update[.]in', sublabel: 'Phishing Lure Domain', layer: 'infra', category: 'DIGITAL INFRASTRUCTURE', color: '#818CF8', x: 240, y: 410, pulse: false, details: { entityType: 'Observed Phishing Domain (Module C)', caseId: 'CASE-RJ-2026-051', sourceFile: 'OSINT_PassiveDNS_051.json • Entry #01', timestamp: '2026-11-18 15:05:00 IST', sha256: 'b3a8e0e1f9ab1bfe3a36f231f676f78bb30a519d2b21e6c530c0eee8ebb4a5d0', confidence: [{ label: 'DNS A-Record Match (185.220.101.44)', score: 100, color: 'bg-indigo-400' }], summary: 'Shares hosting IP 185.220.101.44 with Case 084 & Case 112.', disposition: 'INFRA LEAD' } },
+          { id: 'IP-051', label: '185.220.101.44', sublabel: 'Shared VPS & Nameserver', layer: 'infra', category: 'SHARED IP / NS OVERLAP', color: '#818CF8', x: 610, y: 410, pulse: false, details: { entityType: 'Shared Hosting IPv4 (Module C)', caseId: 'CASE-RJ-2026-051 ↔ 084 ↔ 112', sourceFile: 'OSINT_PassiveDNS_CrossCheck.json', timestamp: '2026-11-24 21:52:10 IST', sha256: 'd4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35', confidence: [{ label: 'Infrastructure Lead Only', score: 82, color: 'bg-indigo-400' }], summary: 'Shared infrastructure observation requiring lawful ISP/registrar records.', disposition: 'INFRA LEAD' } },
+        ],
+        edges: [
+          { id: 'E51-1', from: 'ACC-5101', to: 'ACC-3109', label: '₹12,90,000 • RTGS #UTR771204', layer: 'financial', color: '#38BDF8', marker: 'arrow-cyan', animated: true, dashed: false, details: { entityType: 'Primary Fraud Transfer', caseId: 'CASE-RJ-2026-051', sourceFile: 'BOB_Udaipur_051.csv • Row #09', timestamp: '2026-11-18 16:40:12 IST', sha256: 'a665a45920422f9d417e4867efdc4fb8', confidence: [{ label: 'RTGS UTR Verified', score: 100, color: 'bg-emerald-400' }], summary: 'Unauthorized RTGS transfer.', disposition: 'VERIFIED LEAD' } },
+          { id: 'E51-2', from: 'ACC-3109', to: 'CASE-084-BACKLINK', label: 'Repeat Beneficiary Link (94.6%)', layer: 'financial', color: '#F59E0B', marker: 'arrow-amber', animated: true, dashed: true, details: { entityType: 'Cross-Case Entity Match', caseId: 'CASE-RJ-2026-051 ↔ 084', sourceFile: 'CrossCase_Engine.json', timestamp: '2026-11-24 21:50:00 IST', sha256: '4e07408562bedb8b60ce05c1decfe3ad', confidence: [{ label: 'Hybrid Phone + Fuzzy Name', score: 94.6, color: 'bg-amber-400' }], summary: 'Same mobile hash and 91.4% RapidFuzz name match.', disposition: 'VERIFIED LEAD' } },
+          { id: 'E51-3', from: 'DOM-051', to: 'IP-051', label: 'DNS A / NS Record', layer: 'infra', color: '#818CF8', marker: 'arrow-indigo', animated: false, dashed: false, details: { entityType: 'Passive DNS Resolution', caseId: 'CASE-RJ-2026-051', sourceFile: 'OSINT_PassiveDNS_051.json', timestamp: '2026-11-18 15:05:00 IST', sha256: 'b3a8e0e1f9ab1bfe3a36f231f676f78b', confidence: [{ label: 'Passive DNS Match', score: 100, color: 'bg-indigo-400' }], summary: 'Resolves to 185.220.101.44.', disposition: 'INFRA LEAD' } },
+          { id: 'E51-4', from: 'IP-051', to: 'CASE-084-BACKLINK', label: 'Shared Hosting Overlap', layer: 'infra', color: '#818CF8', marker: 'arrow-indigo', animated: true, dashed: true, details: { entityType: 'Infrastructure Overlap Lead', caseId: 'CASE-RJ-2026-051 ↔ 084', sourceFile: 'OSINT_PassiveDNS_CrossCheck.json', timestamp: '2026-11-24 21:52:10 IST', sha256: 'd4735e3a265e16eee03f59718b9b5d03', confidence: [{ label: 'Shared IP & Nameserver', score: 82, color: 'bg-indigo-400' }], summary: 'Overlaps with Case 084 phishing domain.', disposition: 'INFRA LEAD' } },
+        ],
+        ledger: [
+          { hop: 'Hop 1', timestamp: '2026-11-18 16:40:12', source: 'ACC-5101 (Complainant B - BOB)', beneficiary: 'ACC-3109 (Suresh Meena - PNB)', amount: '₹12,90,000', mode: 'RTGS • #UTR771204', status: 'VALIDATED', sourceRef: 'BOB_Udaipur_051.csv : R09', sha256: 'a665a45920422f9d417e4867efdc4fb8', nodeId: 'ACC-3109' },
+          { hop: 'Hop 2', timestamp: '2026-11-18 17:22:05', source: 'ACC-3109 (Suresh Meena - PNB)', beneficiary: 'ACC-7734 (S. Meena - Cross-Case)', amount: '₹18,50,000', mode: 'NEFT • #UTR771518', status: 'FLAGGED', sourceRef: 'PNB_Kota_051.csv : R08', sha256: '4e07408562bedb8b60ce05c1decfe3ad', nodeId: 'CASE-084-BACKLINK' },
+        ],
+      },
+    };
+
+    /* ==========================================================================
+       2. GLOBAL STATE
+       ========================================================================== */
+    let currentCaseId = 'CASE-RJ-2026-112';
+    let currentLayerFilter = 'all';
+    let selectedElement = null;
+    let graphTransform = { x: 0, y: 0, scale: 1 };
+    let isDraggingGraph = false;
+    let dragStart = { x: 0, y: 0 };
+    let importedBatchApplied = false;
+
+    // Live Gift-Card Simulator State
+    let simCurrentStep = 1;
+    let simAutoPlayTimer = null;
+
+    /* ==========================================================================
+       3. PRIMARY NAVIGATION & METADATA SYNC
+       ========================================================================== */
+    function switchMainView(viewName) {
+      ['workspace', 'simulator', 'architecture', 'governance'].forEach((v) => {
+        const section = document.getElementById(`view-${v}`);
+        const btn = document.getElementById(`nav-btn-${v}`);
+        if (v === viewName) {
+          section.classList.remove('hidden');
+          btn.classList.add('bg-sky-500/20', 'text-sky-300', 'border-sky-400/45', 'shadow-sm', 'shadow-sky-500/10');
+          btn.classList.remove('text-slate-300', 'border-transparent');
+        } else {
+          section.classList.add('hidden');
+          btn.classList.remove('bg-sky-500/20', 'text-sky-300', 'border-sky-400/45', 'shadow-sm', 'shadow-sky-500/10');
+          btn.classList.add('text-slate-300', 'border-transparent');
+        }
+      });
+      if (viewName === 'simulator') {
+        renderSimulatorStep();
+      }
+    }
+
+    function switchWorkbenchTab(tabName) {
+      ['ledger', 'infra', 'crosscase', 'chains', 'gaps', 'report'].forEach((t) => {
+        const panel = document.getElementById(`wb-panel-${t}`);
+        const btn = document.getElementById(`wb-tab-${t}`);
+        if (t === tabName) {
+          panel.classList.remove('hidden');
+          btn.classList.add('border-sky-400', 'text-sky-300', 'bg-[#131C31]');
+          btn.classList.remove('border-transparent', 'text-slate-400');
+        } else {
+          panel.classList.add('hidden');
+          btn.classList.remove('border-sky-400', 'text-sky-300', 'bg-[#131C31]');
+          btn.classList.add('border-transparent', 'text-slate-400');
+        }
+      });
+      if (tabName === 'report') {
+        syncReportDossier();
+      }
+    }
+
+    ['meta-team', 'meta-college', 'meta-members'].forEach((id) => {
+      document.getElementById(id).addEventListener('input', syncReportDossier);
+    });
+
+    function syncReportDossier() {
+      const caseObj = CASES_DATA[currentCaseId];
+      document.getElementById('rep-case-id').textContent = caseObj.id;
+      document.getElementById('rep-team').textContent = document.getElementById('meta-team').textContent.trim();
+      document.getElementById('rep-college').textContent = document.getElementById('meta-college').textContent.trim();
+      document.getElementById('rep-members').textContent = document.getElementById('meta-members').textContent.trim();
+      document.getElementById('rep-summary-text').innerHTML = caseObj.summaryText;
+
+      const tbody = document.getElementById('rep-manifest-tbody');
+      tbody.innerHTML = caseObj.ledger
+        .map(
+          (row) => `
+          <tr>
+            <td class="py-1.5 px-2 font-bold">${row.hop}</td>
+            <td class="py-1.5 px-2">${row.source.split(' ')[0]} → ${row.beneficiary.split(' ')[0]}</td>
+            <td class="py-1.5 px-2 text-right font-bold">${row.amount}</td>
+            <td class="py-1.5 px-2">${row.sourceRef}</td>
+            <td class="py-1.5 px-2 text-slate-600">${row.sha256.slice(0, 18)}...</td>
+          </tr>
+        `
+        )
+        .join('');
+    }
+
+    /* ==========================================================================
+       4. CASE SWITCHING & KPI UPDATES
+       ========================================================================== */
+    function switchCase(caseId) {
+      currentCaseId = caseId;
+      const caseObj = CASES_DATA[caseId];
+      document.getElementById('case-selector').value = caseId;
+
+      document.getElementById('kpi-flow').textContent = caseObj.kpis.flow;
+      document.getElementById('kpi-flow-sub').textContent = caseObj.kpis.flowSub;
+      document.getElementById('kpi-hops').textContent = caseObj.kpis.hops;
+      document.getElementById('kpi-hops-sub').textContent = caseObj.kpis.hopsSub;
+      document.getElementById('kpi-matches').textContent = caseObj.kpis.matches;
+      document.getElementById('kpi-matches-sub').textContent = caseObj.kpis.matchesSub;
+      document.getElementById('kpi-infra').textContent = caseObj.kpis.infra;
+      document.getElementById('kpi-infra-sub').textContent = caseObj.kpis.infraSub;
+      document.getElementById('kpi-gaps').textContent = caseObj.kpis.gaps;
+      document.getElementById('kpi-gaps-sub').textContent = caseObj.kpis.gapsSub;
+
+      // Select key focal node by default
+      const focalNode = caseObj.nodes.find((n) => n.pulse) || caseObj.nodes[0];
+      selectedElement = { kind: 'node', data: focalNode };
+
+      resetGraphTransform();
+      renderGraph();
+      renderInspector();
+      renderLedgerTable();
+      syncReportDossier();
+      appendAuditLog(`Loaded investigation case ${caseId}.`);
+    }
+
+    function openCase112InWorkspace() {
+      switchMainView('workspace');
+      switchCase('CASE-RJ-2026-112');
+      showToast('Switched to CASE-RJ-2026-112 in Multi-Hop Investigation Workspace', 'sky');
+    }
+
+    /* ==========================================================================
+       5. INTERACTIVE MULTI-HOP GRAPH ENGINE
+       ========================================================================== */
+    function setGraphLayer(layer) {
+      currentLayerFilter = layer;
+      ['all', 'financial', 'infra', 'offramp'].forEach((l) => {
+        const btn = document.getElementById(`layer-btn-${l}`);
+        if (l === layer) {
+          btn.classList.add('bg-sky-500/20', 'text-sky-300', 'border-sky-400/40');
+          btn.classList.remove('bg-[#131C31]', 'text-slate-300', 'border-slate-700');
+        } else {
+          btn.classList.remove('bg-sky-500/20', 'text-sky-300', 'border-sky-400/40');
+          btn.classList.add('bg-[#131C31]', 'text-slate-300', 'border-slate-700');
+        }
+      });
+      renderGraph();
+    }
+
+    function renderGraph() {
+      const caseObj = CASES_DATA[currentCaseId];
+      const edgesLayer = document.getElementById('graph-edges-layer');
+      const nodesLayer = document.getElementById('graph-nodes-layer');
+      edgesLayer.innerHTML = '';
+      nodesLayer.innerHTML = '';
+
+      const nodeMap = {};
+      caseObj.nodes.forEach((n) => (nodeMap[n.id] = n));
+
+      // Render Edges
+      caseObj.edges.forEach((edge) => {
+        const src = nodeMap[edge.from];
+        const dst = nodeMap[edge.to];
+        if (!src || !dst) return;
+
+        const isVisible =
+          currentLayerFilter === 'all' ||
+          edge.layer === currentLayerFilter ||
+          (currentLayerFilter === 'offramp' && edge.layer === 'financial');
+
+        const opacity = isVisible ? 1 : 0.14;
+        const isSelected = selectedElement && selectedElement.kind === 'edge' && selectedElement.data.id === edge.id;
+
+        const midX = (src.x + dst.x) / 2;
+        const midY = (src.y + dst.y) / 2 - (src.y === dst.y ? 0 : 12);
+        const pathD = `M ${src.x} ${src.y} Q ${midX} ${midY} ${dst.x} ${dst.y}`;
+
+        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        g.setAttribute('style', `opacity: ${opacity}; cursor: pointer; transition: opacity 0.2s;`);
+        g.addEventListener('click', (e) => {
+          e.stopPropagation();
+          selectGraphElement('edge', edge);
+        });
+
+        const hitPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        hitPath.setAttribute('d', pathD);
+        hitPath.setAttribute('fill', 'none');
+        hitPath.setAttribute('stroke', 'transparent');
+        hitPath.setAttribute('stroke-width', '18');
+        g.appendChild(hitPath);
+
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', pathD);
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', isSelected ? '#FFFFFF' : edge.color);
+        path.setAttribute('stroke-width', isSelected ? '3.2' : '2');
+        path.setAttribute('marker-end', `url(#${edge.marker})`);
+        if (edge.animated) {
+          path.classList.add('edge-flow-active');
+        } else if (edge.dashed) {
+          path.setAttribute('stroke-dasharray', '5 5');
+        }
+        g.appendChild(path);
+
+        const pillWidth = Math.max(98, edge.label.length * 6.2 + 16);
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('x', midX - pillWidth / 2);
+        rect.setAttribute('y', midY - 11);
+        rect.setAttribute('width', pillWidth);
+        rect.setAttribute('height', 20);
+        rect.setAttribute('rx', 6);
+        rect.setAttribute('fill', isSelected ? '#1E293B' : '#0B1120');
+        rect.setAttribute('stroke', isSelected ? '#38BDF8' : edge.color);
+        rect.setAttribute('stroke-opacity', isSelected ? '1' : '0.45');
+        rect.setAttribute('stroke-width', '1');
+        g.appendChild(rect);
+
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', midX);
+        text.setAttribute('y', midY + 2.5);
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('fill', isSelected ? '#FFFFFF' : '#E2E8F0');
+        text.setAttribute('font-family', 'JetBrains Mono, monospace');
+        text.setAttribute('font-size', '10');
+        text.setAttribute('font-weight', '600');
+        text.textContent = edge.label;
+        g.appendChild(text);
+
+        edgesLayer.appendChild(g);
+      });
+
+      // Render Nodes
+      caseObj.nodes.forEach((node) => {
+        const isVisible =
+          currentLayerFilter === 'all' ||
+          node.layer === currentLayerFilter ||
+          (currentLayerFilter === 'offramp' && (node.id === 'AMZ-PAY-IN' || node.id === 'ACC-7721' || node.id === 'ACC-7728'));
+
+        const opacity = isVisible ? 1 : 0.16;
+        const isSelected = selectedElement && selectedElement.kind === 'node' && selectedElement.data.id === node.id;
+
+        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        g.setAttribute('transform', `translate(${node.x}, ${node.y})`);
+        g.setAttribute('style', `opacity: ${opacity}; cursor: pointer; transition: opacity 0.2s;`);
+        g.addEventListener('click', (e) => {
+          e.stopPropagation();
+          selectGraphElement('node', node);
+        });
+
+        if (node.pulse || isSelected) {
+          const pulseCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          pulseCircle.setAttribute('r', isSelected ? '31' : '28');
+          pulseCircle.setAttribute('fill', 'none');
+          pulseCircle.setAttribute('stroke', isSelected ? '#38BDF8' : node.color);
+          pulseCircle.setAttribute('stroke-width', '2');
+          pulseCircle.classList.add('node-pulse-ring');
+          g.appendChild(pulseCircle);
+        }
+
+        if (isSelected) {
+          const halo = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          halo.setAttribute('r', '29');
+          halo.setAttribute('fill', 'rgba(56, 189, 248, 0.14)');
+          halo.setAttribute('stroke', '#38BDF8');
+          halo.setAttribute('stroke-width', '2');
+          g.appendChild(halo);
+        }
+
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('r', '22');
+        circle.setAttribute('fill', '#0F172A');
+        circle.setAttribute('stroke', node.color);
+        circle.setAttribute('stroke-width', isSelected ? '3' : '2.2');
+        circle.setAttribute('filter', 'url(#cyber-glow)');
+        g.appendChild(circle);
+
+        const glyph = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        glyph.setAttribute('y', '4');
+        glyph.setAttribute('text-anchor', 'middle');
+        glyph.setAttribute('fill', node.color);
+        glyph.setAttribute('font-family', 'JetBrains Mono, monospace');
+        glyph.setAttribute('font-size', '9.5');
+        glyph.setAttribute('font-weight', '700');
+        glyph.textContent =
+          node.layer === 'infra'
+            ? 'PROXY'
+            : node.layer === 'offramp'
+            ? 'VALUE'
+            : node.id.startsWith('CASE')
+            ? 'CASE'
+            : 'ACCT';
+        g.appendChild(glyph);
+
+        const cardW = Math.max(132, Math.max(node.label.length, node.sublabel.length) * 6.1 + 18);
+        const labelBg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        labelBg.setAttribute('x', -cardW / 2);
+        labelBg.setAttribute('y', 27);
+        labelBg.setAttribute('width', cardW);
+        labelBg.setAttribute('height', 34);
+        labelBg.setAttribute('rx', 8);
+        labelBg.setAttribute('fill', isSelected ? '#16233B' : '#0F172A');
+        labelBg.setAttribute('stroke', isSelected ? '#38BDF8' : node.color);
+        labelBg.setAttribute('stroke-opacity', isSelected ? '0.9' : '0.35');
+        labelBg.setAttribute('stroke-width', '1');
+        g.appendChild(labelBg);
+
+        const titleTxt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        titleTxt.setAttribute('y', 41);
+        titleTxt.setAttribute('text-anchor', 'middle');
+        titleTxt.setAttribute('fill', '#FFFFFF');
+        titleTxt.setAttribute('font-family', 'JetBrains Mono, monospace');
+        titleTxt.setAttribute('font-size', '10.5');
+        titleTxt.setAttribute('font-weight', '700');
+        titleTxt.textContent = node.label;
+        g.appendChild(titleTxt);
+
+        const subTxt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        subTxt.setAttribute('y', 54);
+        subTxt.setAttribute('text-anchor', 'middle');
+        subTxt.setAttribute('fill', '#94A3B8');
+        subTxt.setAttribute('font-family', 'Inter, sans-serif');
+        subTxt.setAttribute('font-size', '9.5');
+        subTxt.textContent = node.sublabel;
+        g.appendChild(subTxt);
+
+        nodesLayer.appendChild(g);
+      });
+    }
+
+    function selectGraphElement(kind, item) {
+      selectedElement = { kind, data: item };
+      renderGraph();
+      renderInspector();
+    }
+
+    function applyGraphTransform() {
+      const grp = document.getElementById('graph-pan-zoom-group');
+      grp.setAttribute('transform', `translate(${graphTransform.x}, ${graphTransform.y}) scale(${graphTransform.scale})`);
+    }
+
+    function zoomGraph(delta) {
+      graphTransform.scale = Math.min(1.8, Math.max(0.65, +(graphTransform.scale + delta).toFixed(2)));
+      applyGraphTransform();
+    }
+
+    function resetGraphTransform() {
+      graphTransform = { x: 0, y: 0, scale: 1 };
+      applyGraphTransform();
+    }
+
+    const viewport = document.getElementById('graph-viewport');
+    viewport.addEventListener('mousedown', (e) => {
+      if (e.target.closest('button')) return;
+      isDraggingGraph = true;
+      dragStart = { x: e.clientX - graphTransform.x, y: e.clientY - graphTransform.y };
+    });
+    window.addEventListener('mousemove', (e) => {
+      if (!isDraggingGraph) return;
+      graphTransform.x = e.clientX - dragStart.x;
+      graphTransform.y = e.clientY - dragStart.y;
+      applyGraphTransform();
+    });
+    window.addEventListener('mouseup', () => {
+      isDraggingGraph = false;
+    });
+
+    /* ==========================================================================
+       6. EVIDENCE & PROVENANCE INSPECTOR DRAWER
+       ========================================================================== */
+    function renderInspector() {
+      if (!selectedElement) return;
+      const item = selectedElement.data;
+      const d = item.details;
+
+      document.getElementById('inspector-status-badge').textContent = d.disposition || item.category || 'SELECTED';
+
+      const barsHtml = d.confidence
+        .map(
+          (c) => `
+          <div>
+            <div class="flex justify-between text-[11px] font-mono mb-1">
+              <span class="text-slate-300">${c.label}</span>
+              <span class="text-white font-bold">${c.score}%</span>
+            </div>
+            <div class="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
+              <div class="h-full ${c.color} rounded-full" style="width: ${c.score}%"></div>
+            </div>
+          </div>
+        `
+        )
+        .join('');
+
+      document.getElementById('inspector-body').innerHTML = `
+        <div>
+          <div class="flex items-center justify-between text-[11px] font-mono text-sky-400">
+            <span>${selectedElement.kind.toUpperCase()} • ${d.caseId}</span>
+            <span>${d.timestamp}</span>
+          </div>
+          <h3 class="mt-1 text-base font-bold text-white">${item.label}</h3>
+          <p class="text-xs text-slate-400">${d.entityType}</p>
+        </div>
+
+        <div class="p-3 rounded-xl bg-[#0A101D] border border-slate-800 text-xs text-slate-300 leading-relaxed">
+          ${d.summary}
+        </div>
+
+        <div class="space-y-2">
+          <div class="text-[10px] font-mono uppercase tracking-wider text-slate-400">Source Record Provenance</div>
+          <div class="p-2.5 rounded-xl bg-[#131C31] border border-sky-400/20 space-y-1.5 text-xs font-mono">
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="text-slate-400">Origin:</span>
+              <span class="text-sky-300 font-semibold">${d.sourceFile}</span>
+            </div>
+            <div class="pt-1 border-t border-slate-800">
+              <div class="flex items-center justify-between text-[10px] text-slate-400 mb-0.5">
+                <span>SHA-256 EVIDENCE DIGEST</span>
+                <button onclick="copyTextToClipboard('${d.sha256}', 'SHA-256 evidence digest copied.')" class="text-emerald-400 hover:text-emerald-300 underline cursor-pointer">Copy Hash</button>
+              </div>
+              <div class="text-[10px] text-emerald-300 break-all select-all">${d.sha256}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <div class="text-[10px] font-mono uppercase tracking-wider text-slate-400">Explainable Confidence Breakdown</div>
+          <div class="space-y-2.5 bg-[#0A101D] p-3 rounded-xl border border-slate-800">
+            ${barsHtml}
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <div class="text-[10px] font-mono uppercase tracking-wider text-slate-400">Investigator Disposition Controls</div>
+          <div class="grid grid-cols-3 gap-2">
+            <button onclick="applyDisposition('VERIFIED LEAD')"
+              class="px-2 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-400/35 text-emerald-300 text-[11px] font-bold transition-all cursor-pointer">
+              Verify Lead
+            </button>
+            <button onclick="applyDisposition('GAP FLAGGED')"
+              class="px-2 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/35 text-amber-300 text-[11px] font-bold transition-all cursor-pointer">
+              Flag Evidence Gap
+            </button>
+            <button onclick="applyDisposition('NOTICE DRAFTED')"
+              class="px-2 py-2 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 border border-rose-400/35 text-rose-300 text-[11px] font-bold transition-all cursor-pointer">
+              Draft Sec. 94 BNSS
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function applyDisposition(newStatus) {
+      if (!selectedElement) return;
+      selectedElement.data.details.disposition = newStatus;
+      renderInspector();
+      appendAuditLog(`Set [${newStatus}] on ${selectedElement.data.label} (${currentCaseId}).`);
+      showToast(`Disposition updated: ${selectedElement.data.label} → ${newStatus}`, 'emerald');
+      if (newStatus === 'NOTICE DRAFTED') {
+        switchWorkbenchTab('report');
+      }
+    }
+
+    function appendAuditLog(msg) {
+      const list = document.getElementById('audit-log-list');
+      const now = new Date().toTimeString().split(' ')[0];
+      const entry = document.createElement('div');
+      entry.className = 'text-emerald-300';
+      entry.textContent = `• [${now} IST] ${msg}`;
+      list.prepend(entry);
+    }
+
+    /* ==========================================================================
+       7. LIVE GIFT-CARD INTERCEPTION SIMULATOR ENGINE (5 STEPS)
+       ========================================================================== */
+    const SIMULATOR_STEPS = {
+      1: {
+        url: 'https://amz-festive-vouchers[.]in/claim-bonus',
+        padlockSecure: false,
+        victimBadge: 'DECOY PROMO PORTAL',
+        attackerBadge: 'STEP 1: DECOY LURE LANDING',
+        timer: 'ELAPSED: T+00s',
+        victimHtml: `
+          <div class="rounded-xl bg-gradient-to-r from-amber-500/15 to-sky-500/15 border border-amber-400/30 p-3.5 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-300">FESTIVE REWARD PORTAL • INSTANT ₹2,500 CASHBACK</span>
+              <span class="text-[10px] font-mono text-slate-400">Promo #AMZ-2026</span>
+            </div>
+            <p class="text-xs text-slate-200">
+              "Purchase a ₹25,000 Amazon Pay E-Gift Card via official Amazon Checkout and receive instant ₹2,500 bonus credit!"
+            </p>
+            <div class="pt-1 flex items-center justify-between">
+              <span class="text-[11px] font-mono text-slate-400">Selected Denomination: ₹25,000</span>
+              <span class="px-3 py-1 rounded-lg bg-amber-400 text-slate-950 font-bold text-xs">Proceed to Official Amazon →</span>
+            </div>
+          </div>
+          <p class="text-[11px] text-slate-400">
+            <strong>Victim Perspective:</strong> The decoy website does NOT ask for bank passwords or card PINs. It promises to forward the victim straight to the real Amazon website to buy the gift card.
+          </p>
+        `,
+        blindspot:
+          'Because the decoy site never collects payment credentials itself, the victim trusts the checkout flow completely once the genuine Amazon domain loads.',
+        telemetry: (mode) => `
+          <div>[15:09:12.104] GET /claim-bonus HTTP/1.1 → Host: <span class="text-rose-300">amz-festive-vouchers[.]in</span> (IP: 185.220.101.44)</div>
+          <div>[15:09:13.880] Victim clicked "Proceed to Official Amazon". Preparing <span class="text-amber-300">${mode === 'param' ? 'HTTP 302 Recipient-Injected Redirect' : 'AiTM Reverse Proxy TLS Session'}</span>...</div>
+        `,
+        svg: (mode) => `
+          <line x1="95" y1="92" x2="255" y2="92" stroke="#818CF8" stroke-width="3" class="edge-flow-active"/>
+          <circle cx="95" cy="92" r="26" fill="#0F172A" stroke="#38BDF8" stroke-width="2.5"/>
+          <text x="95" y="96" text-anchor="middle" fill="#38BDF8" font-family="JetBrains Mono" font-size="10" font-weight="700">VICTIM</text>
+          <text x="95" y="135" text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono" font-size="9">Jaipur Browser</text>
+
+          <rect x="255" y="56" width="170" height="72" rx="12" fill="#131C31" stroke="#F43F5E" stroke-width="2.5"/>
+          <text x="340" y="84" text-anchor="middle" fill="#F43F5E" font-family="JetBrains Mono" font-size="10.5" font-weight="700">DECOY LURE SERVER</text>
+          <text x="340" y="101" text-anchor="middle" fill="#E2E8F0" font-family="JetBrains Mono" font-size="9">amz-festive-vouchers[.]in</text>
+          <text x="340" y="116" text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono" font-size="8.5">185.220.101.44 (AS205100)</text>
+        `,
+        modC: 'Detects initial lure hit on amz-festive-vouchers[.]in hosted on offshore VPS 185.220.101.44 (AS205100).',
+        modG: 'Early stage: No financial debit has occurred yet; DNS & passive HTTP logs establish lure origin.',
+        activeStage: 0,
+      },
+
+      2: {
+        url: 'https://www.amazon.in/gp/buy/spc/handlers/display.html?recipientEmail=drop.mule88%40proton.me...',
+        padlockSecure: true,
+        victimBadge: 'GENUINE AMAZON.IN HTTPS',
+        attackerBadge: 'STEP 2: TRANSPARENT HIJACK',
+        timer: 'ELAPSED: T+02s',
+        victimHtml: `
+          <div class="rounded-xl bg-emerald-500/10 border border-emerald-400/35 p-3.5 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-emerald-300 flex items-center gap-1.5">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                Verified SSL Certificate: Amazon.in (DigiCert Global Root G2)
+              </span>
+            </div>
+            <p class="text-xs text-slate-200">
+              The victim's browser now displays the <strong>100% genuine Amazon.in checkout page</strong> for an Amazon Pay E-Gift Card (₹25,000). The long query string hides the pre-filled recipient email field below the fold.
+            </p>
+          </div>
+          <p class="text-[11px] text-slate-400">
+            <strong>Victim Perspective:</strong> Seeing the genuine <code>amazon.in</code> domain and green HTTPS padlock removes all suspicion.
+          </p>
+        `,
+        blindspot:
+          'Because the URL bar genuinely shows amazon.in, the victim verifies the domain name and proceeds to pay without noticing the pre-filled attacker recipient parameter.',
+        telemetry: (mode) =>
+          mode === 'param'
+            ? `
+          <div>[15:09:14.210] <span class="text-amber-300">HTTP 302 FOUND</span> → Location: https://www.amazon.in/gp/buy/...?<span class="text-rose-300 font-bold">recipientEmail=drop.mule88@proton.me</span></div>
+          <div>[15:09:14.512] Attacker drop inbox injected silently into genuine Amazon checkout session.</div>
+        `
+            : `
+          <div>[15:09:14.210] <span class="text-rose-300">AiTM REVERSE PROXY ACTIVE</span> → Relaying TLS stream between Victim and genuine amazon.in</div>
+          <div>[15:09:14.618] Session token &amp; post-checkout order confirmation page hooked for real-time claim code scraping.</div>
+        `,
+        svg: (mode) => `
+          <line x1="75" y1="92" x2="215" y2="92" stroke="#38BDF8" stroke-width="3" class="edge-flow-active"/>
+          <line x1="345" y1="92" x2="480" y2="92" stroke="#10B981" stroke-width="3" class="edge-flow-active"/>
+
+          <circle cx="75" cy="92" r="24" fill="#0F172A" stroke="#38BDF8" stroke-width="2.5"/>
+          <text x="75" y="96" text-anchor="middle" fill="#38BDF8" font-family="JetBrains Mono" font-size="9.5" font-weight="700">VICTIM</text>
+
+          <rect x="215" y="54" width="130" height="76" rx="12" fill="#131C31" stroke="#F59E0B" stroke-width="2.5"/>
+          <text x="280" y="80" text-anchor="middle" fill="#F59E0B" font-family="JetBrains Mono" font-size="9.5" font-weight="700">${mode === 'param' ? '302 INJECTOR' : 'AiTM PROXY'}</text>
+          <text x="280" y="98" text-anchor="middle" fill="#F43F5E" font-family="JetBrains Mono" font-size="8.5">drop.mule88@proton</text>
+          <text x="280" y="114" text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono" font-size="8">Hidden Parameter</text>
+
+          <circle cx="480" cy="92" r="28" fill="#0F172A" stroke="#10B981" stroke-width="2.5"/>
+          <text x="480" y="89" text-anchor="middle" fill="#10B981" font-family="JetBrains Mono" font-size="9.5" font-weight="700">AMAZON.IN</text>
+          <text x="480" y="102" text-anchor="middle" fill="#CBD5E1" font-family="JetBrains Mono" font-size="8">Genuine SSL</text>
+        `,
+        modC: 'Extracts HTTP 302 Location query string revealing recipientEmail=drop.mule88@proton[.]me injected by amz-festive-vouchers[.]in.',
+        modG: 'Links the decoy infrastructure to the genuine merchant order before payment even settles.',
+        activeStage: 0,
+      },
+
+      3: {
+        url: 'https://www.amazon.in/gp/buy/thankyou/handlers/display.html?orderId=408-119204',
+        padlockSecure: true,
+        victimBadge: 'BANK STATEMENT: AMAZON PAY',
+        attackerBadge: 'STEP 3: GENUINE SETTLEMENT',
+        timer: 'ELAPSED: T+52s (15:10:04 IST)',
+        victimHtml: `
+          <div class="rounded-xl bg-[#131C31] border border-sky-400/35 p-3.5 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-emerald-400">✓ Order Placed: ₹25,000.00 Paid via UPI</span>
+              <span class="text-[11px] font-mono text-slate-400">UPI #432910884120</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-[#080D18] border border-slate-700 font-mono text-[11px] text-slate-200">
+              <div class="text-[10px] text-slate-400 mb-0.5">VICTIM BANK STATEMENT ENTRY (HDFC):</div>
+              <div class="text-sky-300 font-bold">22-NOV-2026 | UPI/432910884120/Amazon Pay India Pvt Ltd | ₹25,000.00 DR</div>
+            </div>
+          </div>
+          <p class="text-[11px] text-slate-400">
+            <strong>Victim Perspective:</strong> Payment succeeded to Amazon Pay India, so the victim waits for the gift card voucher to arrive in their own inbox.
+          </p>
+        `,
+        blindspot:
+          'CRITICAL BLIND SPOT: On the victim\'s bank statement, the beneficiary is "Amazon Pay India Pvt Ltd". Traditional bank-only tracing cannot see who received or redeemed the gift card!',
+        telemetry: (mode) => `
+          <div>[15:10:04.112] NPCI UPI Settlement Confirmed: <span class="text-emerald-300">₹25,000.00 → Amazon Pay India Pvt Ltd</span></div>
+          <div>[15:10:41.009] Amazon Fulfillment Engine generated E-Voucher <span class="text-amber-300 font-bold">GC-9941-AMZ</span> (Code: <span class="text-rose-300 font-bold">8X9K-M2P74Q-Z91L</span>)</div>
+        `,
+        svg: (mode) => `
+          <line x1="85" y1="92" x2="275" y2="92" stroke="#38BDF8" stroke-width="3.5" class="edge-flow-active"/>
+          <line x1="275" y1="92" x2="475" y2="92" stroke="#F59E0B" stroke-width="3.5" class="edge-flow-active"/>
+
+          <circle cx="85" cy="92" r="26" fill="#0F172A" stroke="#38BDF8" stroke-width="2.5"/>
+          <text x="85" y="90" text-anchor="middle" fill="#38BDF8" font-family="JetBrains Mono" font-size="9" font-weight="700">ACC-6204</text>
+          <text x="85" y="103" text-anchor="middle" fill="#CBD5E1" font-family="JetBrains Mono" font-size="8">-₹25,000</text>
+
+          <circle cx="275" cy="92" r="30" fill="#0F172A" stroke="#10B981" stroke-width="2.5"/>
+          <text x="275" y="89" text-anchor="middle" fill="#10B981" font-family="JetBrains Mono" font-size="9" font-weight="700">AMAZON PAY</text>
+          <text x="275" y="102" text-anchor="middle" fill="#CBD5E1" font-family="JetBrains Mono" font-size="8">Genuine Payee</text>
+
+          <rect x="415" y="60" width="125" height="64" rx="10" fill="#131C31" stroke="#F59E0B" stroke-width="2.5"/>
+          <text x="477" y="86" text-anchor="middle" fill="#F59E0B" font-family="JetBrains Mono" font-size="9.5" font-weight="700">GC-9941-AMZ</text>
+          <text x="477" y="103" text-anchor="middle" fill="#FFFFFF" font-family="JetBrains Mono" font-size="8.5">8X9K-M2P74Q-Z91L</text>
+        `,
+        modC: 'Correlates UPI Ref #432910884120 timestamp (15:10:04 IST) with the decoy proxy session window.',
+        modG: 'Module G flags: Genuine merchant debit confirmed, but voucher recipient record is missing from bank data.',
+        activeStage: 2,
+      },
+
+      4: {
+        url: 'https://www.amazon.in/gp/css/order-history (Victim sees: "Delivered to Recipient")',
+        padlockSecure: true,
+        victimBadge: 'VOUCHER NEVER ARRIVED',
+        attackerBadge: 'STEP 4: CLAIM CODE STOLEN (94s)',
+        timer: 'ELAPSED: +94 SECONDS (15:12:15 IST)',
+        victimHtml: `
+          <div class="rounded-xl bg-rose-500/10 border border-rose-400/35 p-3.5 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-rose-300">⚠ Victim Realizes E-Gift Card Never Arrived</span>
+              <span class="text-[11px] font-mono text-amber-300">+94s Post-Payment</span>
+            </div>
+            <p class="text-xs text-slate-200">
+              While the victim checks their spam folder, the attacker has already received the unredeemed claim code <code>8X9K-M2P74Q-Z91L</code> and redeemed the full ₹25,000 balance into an attacker-controlled Amazon Pay wallet.
+            </p>
+          </div>
+          <p class="text-[11px] text-slate-400">
+            <strong>Victim Perspective:</strong> Customer support states the gift card was already delivered and redeemed—leaving the victim helpless without cybercrime forensics.
+          </p>
+        `,
+        blindspot:
+          'Within 94 seconds, the ₹25,000 gift card is redeemed into Wallet AMZ-WLT-884920 and liquidated into Order #408-992140 (high-value smartphone).',
+        telemetry: (mode) => `
+          <div>[15:10:41.220] Voucher 8X9K-M2P74Q-Z91L delivered to <span class="text-rose-300 font-bold">drop.mule88@proton[.]me</span></div>
+          <div>[15:12:15.004] <span class="text-amber-300 font-bold">REDEEMED IN 94 SECONDS</span> → Wallet <span class="text-emerald-300">AMZ-WLT-884920</span> → Order <span class="text-rose-300">#408-992140</span></div>
+        `,
+        svg: (mode) => `
+          <line x1="65" y1="92" x2="215" y2="92" stroke="#F59E0B" stroke-width="3" class="edge-flow-active"/>
+          <line x1="215" y1="92" x2="365" y2="92" stroke="#F43F5E" stroke-width="3" class="edge-flow-active"/>
+          <line x1="365" y1="92" x2="500" y2="92" stroke="#10B981" stroke-width="3" class="edge-flow-active"/>
+
+          <circle cx="65" cy="92" r="24" fill="#0F172A" stroke="#F59E0B" stroke-width="2.5"/>
+          <text x="65" y="96" text-anchor="middle" fill="#F59E0B" font-family="JetBrains Mono" font-size="8.5" font-weight="700">GC-9941</text>
+
+          <rect x="155" y="58" width="125" height="68" rx="10" fill="#131C31" stroke="#F43F5E" stroke-width="2.5"/>
+          <text x="217" y="84" text-anchor="middle" fill="#F43F5E" font-family="JetBrains Mono" font-size="9" font-weight="700">MULE INBOX</text>
+          <text x="217" y="100" text-anchor="middle" fill="#E2E8F0" font-family="JetBrains Mono" font-size="8">drop.mule88@proton</text>
+
+          <rect x="310" y="58" width="120" height="68" rx="10" fill="#131C31" stroke="#10B981" stroke-width="2.5"/>
+          <text x="370" y="84" text-anchor="middle" fill="#10B981" font-family="JetBrains Mono" font-size="9" font-weight="700">WALLET (94s)</text>
+          <text x="370" y="100" text-anchor="middle" fill="#E2E8F0" font-family="JetBrains Mono" font-size="8">AMZ-WLT-884920</text>
+
+          <circle cx="505" cy="92" r="26" fill="#0F172A" stroke="#F43F5E" stroke-width="2.5"/>
+          <text x="505" y="89" text-anchor="middle" fill="#F43F5E" font-family="JetBrains Mono" font-size="8.5" font-weight="700">ORDER</text>
+          <text x="505" y="102" text-anchor="middle" fill="#CBD5E1" font-family="JetBrains Mono" font-size="8">#408-992140</text>
+        `,
+        modC: 'Links drop.mule88@proton[.]me across 3 prior synthetic gift-card interception complaints.',
+        modG: 'All 4 stages of Module E populated: Purchase → Delivery → Diverted Recipient → 94s Wallet Redemption.',
+        activeStage: 3,
+      },
+
+      5: {
+        url: 'fintrace-x://case/CASE-RJ-2026-112/sec94-bnss-requisition-ready',
+        padlockSecure: true,
+        victimBadge: 'CASE SOLVED VIA FINTRACE X',
+        attackerBadge: 'STEP 5: EVIDENCE DOSSIER & 94 BNSS',
+        timer: 'CHAIN OF CUSTODY: SHA-256 LOCKED',
+        victimHtml: `
+          <div class="rounded-xl bg-emerald-500/15 border border-emerald-400/45 p-3.5 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-emerald-300">✓ Complete End-to-End Evidence Chain Reconstructed</span>
+              <span class="text-[10px] font-mono bg-emerald-500/20 text-emerald-200 px-2 py-0.5 rounded">SHA-256 VERIFIED</span>
+            </div>
+            <p class="text-xs text-slate-200">
+              FINTRACE X connects the victim's genuine UPI payment (<code>#432910884120</code>), the decoy redirect proxy (<code>amz-festive-vouchers[.]in</code>), the diverted claim code (<code>GC-9941-AMZ</code>), and the 94-second redemption wallet (<code>AMZ-WLT-884920</code>) into a court-ready Section 94 BNSS dossier.
+            </p>
+          </div>
+          <p class="text-[11px] text-emerald-300">
+            <strong>Investigator Outcome:</strong> Enables immediate freeze of Wallet AMZ-WLT-884920, cancellation of liquidation Order #408-992140, and lawful attribution of the mule operator.
+          </p>
+        `,
+        blindspot:
+          'SOLVED: FINTRACE X eliminates the "Legitimate Merchant Bank Entry" blind spot by uniting Module C (Redirect/DNS), Module E (4-Stage Gift-Card Chain), and Module G (Sec. 94 BNSS Requisition).',
+        telemetry: (mode) => `
+          <div>[FINTRACE-X] Reconstructed 5-node graph for <span class="text-sky-300 font-bold">CASE-RJ-2026-112</span> (SHA-256 Digest Verified)</div>
+          <div>[FINTRACE-X] Generated <span class="text-emerald-300 font-bold">Section 94 BNSS Requisition</span> for Amazon Pay Merchant &amp; Shipping Logs.</div>
+        `,
+        svg: (mode) => `
+          <line x1="75" y1="92" x2="215" y2="92" stroke="#38BDF8" stroke-width="3"/>
+          <line x1="215" y1="92" x2="355" y2="92" stroke="#F59E0B" stroke-width="3"/>
+          <line x1="355" y1="92" x2="490" y2="92" stroke="#10B981" stroke-width="3"/>
+          <line x1="215" y1="32" x2="215" y2="66" stroke="#818CF8" stroke-width="2.5" stroke-dasharray="4 3"/>
+
+          <rect x="145" y="10" width="140" height="24" rx="6" fill="#131C31" stroke="#818CF8" stroke-width="1.5"/>
+          <text x="215" y="25" text-anchor="middle" fill="#818CF8" font-family="JetBrains Mono" font-size="8.5" font-weight="700">MOD C: 302 PROXY</text>
+
+          <circle cx="75" cy="92" r="24" fill="#0F172A" stroke="#38BDF8" stroke-width="2.5"/>
+          <text x="75" y="96" text-anchor="middle" fill="#38BDF8" font-family="JetBrains Mono" font-size="8.5" font-weight="700">UPI PAY</text>
+
+          <circle cx="215" cy="92" r="24" fill="#0F172A" stroke="#F59E0B" stroke-width="2.5"/>
+          <text x="215" y="96" text-anchor="middle" fill="#F59E0B" font-family="JetBrains Mono" font-size="8.5" font-weight="700">MOD E</text>
+
+          <circle cx="355" cy="92" r="24" fill="#0F172A" stroke="#F43F5E" stroke-width="2.5"/>
+          <text x="355" y="96" text-anchor="middle" fill="#F43F5E" font-family="JetBrains Mono" font-size="8.5" font-weight="700">WALLET</text>
+
+          <rect x="435" y="64" width="110" height="56" rx="10" fill="#064E3B" stroke="#10B981" stroke-width="2.5"/>
+          <text x="490" y="89" text-anchor="middle" fill="#FFFFFF" font-family="JetBrains Mono" font-size="9" font-weight="700">94 BNSS</text>
+          <text x="490" y="104" text-anchor="middle" fill="#6EE7B7" font-family="JetBrains Mono" font-size="8">DOSSIER READY</text>
+        `,
+        modC: 'Domain amz-festive-vouchers[.]in, IP 185.220.101.44, and HTTP 302 header archived with SHA-256 hash.',
+        modG: 'Section 94 BNSS notice ready for dispatch to Amazon Pay Nodal Officer.',
+        activeStage: 4,
+      },
+    };
+
+    function setSimStep(stepNum) {
+      simCurrentStep = stepNum;
+      renderSimulatorStep();
+    }
+
+    function nextSimStep() {
+      simCurrentStep = simCurrentStep >= 5 ? 1 : simCurrentStep + 1;
+      renderSimulatorStep();
+    }
+
+    function prevSimStep() {
+      simCurrentStep = simCurrentStep <= 1 ? 5 : simCurrentStep - 1;
+      renderSimulatorStep();
+    }
+
+    function toggleSimAutoPlay() {
+      const label = document.getElementById('sim-autoplay-label');
+      if (simAutoPlayTimer) {
+        clearInterval(simAutoPlayTimer);
+        simAutoPlayTimer = null;
+        label.textContent = 'Play Auto-Simulation';
+      } else {
+        label.textContent = 'Pause Auto-Play';
+        simAutoPlayTimer = setInterval(() => {
+          nextSimStep();
+        }, 3200);
+      }
+    }
+
+    function renderSimulatorStep() {
+      const step = SIMULATOR_STEPS[simCurrentStep];
+      const mode = document.getElementById('sim-vector-mode').value;
+
+      // Update Stepper Pills
+      for (let i = 1; i <= 5; i++) {
+        const pill = document.getElementById(`sim-step-pill-${i}`);
+        if (i === simCurrentStep) {
+          pill.className =
+            'sim-step-pill text-left p-2.5 rounded-xl border border-sky-400 bg-sky-500/20 text-white shadow-sm shadow-sky-500/15 transition-all cursor-pointer';
+        } else if (i < simCurrentStep) {
+          pill.className =
+            'sim-step-pill text-left p-2.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-200 transition-all cursor-pointer';
+        } else {
+          pill.className =
+            'sim-step-pill text-left p-2.5 rounded-xl border border-slate-800 bg-[#131C31] text-slate-400 hover:text-slate-200 transition-all cursor-pointer';
+        }
+      }
+
+      // Update Browser Chrome & Victim Screen
+      const urlSpan = document.getElementById('sim-browser-url');
+      const urlBox = document.getElementById('sim-browser-url-box');
+      const padlock = document.getElementById('sim-padlock-icon');
+      urlSpan.textContent = step.url;
+
+      if (step.padlockSecure) {
+        urlBox.className =
+          'flex-1 flex items-center gap-2 bg-[#080D18] border border-emerald-500/50 rounded-lg px-2.5 py-1 text-[11px] font-mono overflow-x-auto';
+        urlSpan.className = 'text-emerald-300 whitespace-nowrap';
+        padlock.className = 'w-3.5 h-3.5 text-emerald-400 shrink-0';
+      } else {
+        urlBox.className =
+          'flex-1 flex items-center gap-2 bg-[#080D18] border border-amber-500/50 rounded-lg px-2.5 py-1 text-[11px] font-mono overflow-x-auto';
+        urlSpan.className = 'text-amber-300 whitespace-nowrap';
+        padlock.className = 'w-3.5 h-3.5 text-amber-400 shrink-0';
+      }
+
+      document.getElementById('sim-victim-badge').textContent = step.victimBadge;
+      document.getElementById('sim-attacker-badge').textContent = step.attackerBadge;
+      document.getElementById('sim-timer-chip').textContent = step.timer;
+      document.getElementById('sim-victim-screen').innerHTML = step.victimHtml;
+      document.getElementById('sim-blindspot-note').innerHTML = step.blindspot;
+
+      // Update Attacker SVG & Telemetry
+      document.getElementById('sim-attacker-svg').innerHTML = step.svg(mode);
+      document.getElementById('sim-telemetry-log').innerHTML = step.telemetry(mode);
+
+      // Update Synchronized FINTRACE X Reconstruction Cards
+      document.getElementById('sim-mod-c-text').textContent = step.modC;
+      document.getElementById('sim-mod-g-text').textContent = step.modG;
+
+      for (let s = 1; s <= 4; s++) {
+        const stEl = document.getElementById(`sim-e-stage-${s}`);
+        if (s <= step.activeStage) {
+          stEl.className = 'p-1.5 rounded bg-emerald-500/15 border border-emerald-400/45 text-emerald-200 font-bold';
+        } else {
+          stEl.className = 'p-1.5 rounded bg-[#0A101D] border border-slate-700 text-slate-400';
+        }
+      }
+    }
+
+    function copySection94Draft() {
+      const draft =
+        'REQUISITION UNDER SECTION 94 BNSS — TO: Nodal Officer, Amazon Pay (India) Pvt. Ltd. | SUBJECT: E-Gift Card Order & Redemption Logs (Synthetic Ref: CASE-RJ-2026-112) | REQUIRED: (1) Complete order metadata & recipient email for UPI Ref #432910884120 (₹25,000 on 2026-11-22 15:10:04 IST); (2) Redemption timestamp, Wallet ID (AMZ-WLT-884920), login IP logs & KYC for Voucher GC-9941-AMZ; (3) Shipping address & receiver phone for Order #408-992140.';
+      copyTextToClipboard(draft, 'Section 94 BNSS Requisition draft copied to clipboard.');
+    }
+
+    /* ==========================================================================
+       8. FINANCIAL LEDGER & CROSS-CASE INTERACTIONS
+       ========================================================================== */
+    function renderLedgerTable() {
+      const caseObj = CASES_DATA[currentCaseId];
+      const query = (document.getElementById('ledger-search').value || '').toLowerCase();
+      const statusFilter = document.getElementById('ledger-filter').value;
+
+      const filtered = caseObj.ledger.filter((row) => {
+        const matchesStatus = statusFilter === 'all' || row.status === statusFilter;
+        const matchesQuery =
+          !query ||
+          row.source.toLowerCase().includes(query) ||
+          row.beneficiary.toLowerCase().includes(query) ||
+          row.mode.toLowerCase().includes(query) ||
+          row.hop.toLowerCase().includes(query);
+        return matchesStatus && matchesQuery;
+      });
+
+      const tbody = document.getElementById('ledger-tbody');
+      tbody.innerHTML = filtered
+        .map((row) => {
+          const badgeClass =
+            row.status === 'VALIDATED'
+              ? 'bg-emerald-500/15 text-emerald-300 border-emerald-400/30'
+              : row.status === 'FLAGGED'
+              ? 'bg-rose-500/15 text-rose-300 border-rose-400/30'
+              : 'bg-amber-500/15 text-amber-300 border-amber-400/30';
+
+          return `
+            <tr onclick="focusNodeFromLedger('${row.nodeId}')" class="hover:bg-[#16223C] cursor-pointer transition-colors">
+              <td class="py-2.5 px-3 font-bold text-sky-300">${row.hop}</td>
+              <td class="py-2.5 px-3 text-slate-300">${row.timestamp}</td>
+              <td class="py-2.5 px-3 text-slate-200">${row.source}</td>
+              <td class="py-2.5 px-3 text-white font-semibold">${row.beneficiary}</td>
+              <td class="py-2.5 px-3 text-right font-bold text-emerald-300">${row.amount}</td>
+              <td class="py-2.5 px-3 text-slate-300">${row.mode}</td>
+              <td class="py-2.5 px-3">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold border ${badgeClass}">${row.status}</span>
+              </td>
+              <td class="py-2.5 px-3 text-[11px] text-slate-400">${row.sourceRef}</td>
+            </tr>
+          `;
+        })
+        .join('');
+    }
+
+    function focusNodeFromLedger(nodeId) {
+      const caseObj = CASES_DATA[currentCaseId];
+      const targetNode = caseObj.nodes.find((n) => n.id === nodeId);
+      if (targetNode) {
+        selectGraphElement('node', targetNode);
+        showToast(`Highlighted ${targetNode.label} in Money-Trail Graph`, 'sky');
+      }
+    }
+
+    function toggleCrossCaseReview(cardIndex) {
+      const el = document.getElementById(`cc-status-${cardIndex}`);
+      const isVerified = el.textContent.includes('VERIFIED');
+      if (isVerified) {
+        el.textContent = 'Status: NEEDS REVIEW';
+        el.className = 'text-[11px] font-mono text-amber-300';
+        appendAuditLog(`Cross-Case Match #${cardIndex} marked for secondary review.`);
+      } else {
+        el.textContent = 'Status: VERIFIED LEAD';
+        el.className = 'text-[11px] font-mono text-emerald-400';
+        appendAuditLog(`Cross-Case Match #${cardIndex} verified by investigating officer.`);
+      }
+    }
+
+    /* ==========================================================================
+       9. SIMULATED CSV/XLSX STATEMENT IMPORT MODAL
+       ========================================================================== */
+    function openImportModal() {
+      const modal = document.getElementById('import-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      ['step-1', 'step-2', 'step-3'].forEach((id) => {
+        const span = document.getElementById(id).querySelector('span:last-child');
+        span.textContent = 'READY';
+        span.className = 'text-slate-500';
+      });
+    }
+
+    function closeImportModal() {
+      const modal = document.getElementById('import-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function executeSimulatedImport() {
+      const steps = ['step-1', 'step-2', 'step-3'];
+      steps.forEach((id, idx) => {
+        setTimeout(() => {
+          const span = document.getElementById(id).querySelector('span:last-child');
+          span.textContent = 'VERIFIED ✓';
+          span.className = 'text-emerald-400 font-bold';
+        }, (idx + 1) * 320);
+      });
+
+      setTimeout(() => {
+        if (!importedBatchApplied) {
+          importedBatchApplied = true;
+          const case112 = CASES_DATA['CASE-RJ-2026-112'];
+          case112.nodes.push({
+            id: 'DROP-HUB-JPR',
+            label: 'Jaipur Pickup Locker',
+            sublabel: 'Delivery OTP +91-9784XXXXXX',
+            layer: 'offramp',
+            category: 'PHYSICAL DROP POINT',
+            color: '#F43F5E',
+            x: 645,
+            y: 465,
+            pulse: true,
+            details: {
+              entityType: 'Physical Package Pickup Point (Sec. 94 BNSS Extract)',
+              caseId: 'CASE-RJ-2026-112',
+              sourceFile: 'AmazonPay_Sec94_Issuer_Response_112.xlsx • Row #14',
+              timestamp: '2026-11-23 11:04:19 IST',
+              sha256: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+              confidence: [{ label: 'Shipping Manifest & Receiver Mobile Match', score: 99, color: 'bg-rose-400' }],
+              summary: 'Newly ingested Sec. 94 BNSS shipping log links Order #408-992140 to a physical pickup locker and receiver mobile.',
+              disposition: 'VERIFIED LEAD',
+            },
+          });
+          case112.edges.push({
+            id: 'E112-8',
+            from: 'LIQ-ORDER-408',
+            to: 'DROP-HUB-JPR',
+            label: 'Shipped • Sec. 94 Log',
+            layer: 'offramp',
+            color: '#F43F5E',
+            marker: 'arrow-crimson',
+            animated: true,
+            dashed: false,
+            details: {
+              entityType: 'Physical Fulfillment Trace',
+              caseId: 'CASE-RJ-2026-112',
+              sourceFile: 'AmazonPay_Sec94_Issuer_Response_112.xlsx • Row #14',
+              timestamp: '2026-11-23 11:04:19 IST',
+              sha256: 'e3b0c44298fc1c149afbf4c8996fb924',
+              confidence: [{ label: 'Shipping Manifest Verified', score: 99, color: 'bg-emerald-400' }],
+              summary: 'Links liquidation order to physical receiver drop.',
+              disposition: 'VERIFIED LEAD',
+            },
+          });
+          case112.ledger.push({
+            hop: 'Stage 6',
+            timestamp: '2026-11-23 11:04:19',
+            source: 'Order #408-992140 (Fulfillment)',
+            beneficiary: 'Jaipur Pickup Locker (+91-9784XXXXXX)',
+            amount: '₹24,999',
+            mode: 'SEC.94 • Shipping Log',
+            status: 'OFFRAMP',
+            sourceRef: 'Amazon_Sec94_Resp.xlsx : R14',
+            sha256: 'e3b0c44298fc1c149afbf4c8996fb924',
+            nodeId: 'DROP-HUB-JPR',
+          });
+        }
+
+        closeImportModal();
+        switchCase('CASE-RJ-2026-112');
+        appendAuditLog('Ingested AmazonPay_Sec94_Issuer_Response_112.xlsx (SHA-256 verified).');
+        showToast('Ingested Section 94 BNSS extract & appended Jaipur Pickup Locker node!', 'emerald');
+      }, 1250);
+    }
+
+    /* ==========================================================================
+       10. CLIPBOARD & TOAST UTILITIES (NO ALERT/CONFIRM)
+       ========================================================================== */
+    function copyTextToClipboard(text, successMsg) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast(successMsg || 'Copied to clipboard.', 'emerald');
+      } catch (err) {
+        showToast('Unable to copy automatically — please select text manually.', 'amber');
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function showToast(message, tone = 'sky') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      const borderClass =
+        tone === 'emerald'
+          ? 'border-emerald-400/50 text-emerald-200 bg-[#0A1916]'
+          : tone === 'amber'
+          ? 'border-amber-400/50 text-amber-200 bg-[#1B150A]'
+          : 'border-sky-400/50 text-sky-200 bg-[#0B1628]';
+
+      toast.className = `pointer-events-auto px-4 py-2.5 rounded-xl border shadow-xl text-xs font-mono flex items-center gap-2 transition-all ${borderClass}`;
+      toast.innerHTML = `<span class="w-2 h-2 rounded-full bg-current"></span><span>${message}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 250);
+      }, 3200);
+    }
+
+    /* ==========================================================================
+       11. INITIALIZATION ON WINDOW LOAD
+       ========================================================================== */
+    window.addEventListener('DOMContentLoaded', () => {
+      switchCase('CASE-RJ-2026-112');
+      renderSimulatorStep();
+    });
+  </script>
+</body>
+</html>
